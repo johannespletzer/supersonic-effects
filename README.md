@@ -87,12 +87,6 @@ The data underlying the software originates from [Van 't Hoff et al. 2024](https
 
 ---
 
-## 📌 License
-
-Apache-2.0 or GNU GDLv3
-
----
-
 ## 🧪 Running Tests
 
 Requires `pytest`
