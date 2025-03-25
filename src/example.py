@@ -8,9 +8,10 @@ sensitivity_df, taylor_df = load_data()
 altitude_km = 19.0
 region = "Transatlantic_Corridor"
 emissions = {
-    'NOx': 1780.0, # GgNO2
-    'SOx': 0.0, # GgS
-    'H2O': 151.0 # TgH2O
+    'NOx': 1780.0, # GgNO2/yr
+    'SOx': 73.39/44.01*12.01, # GgS/yr
+    'H2O': 151.31 # TgH2O/yr
+#    'Fuel': 122320.0 # Gg/yr
 }
 
 # Calculate ozone change (ΔF), first and second term
