@@ -98,6 +98,7 @@ pytest
 
 ## 📚 Data Sources
 
+The data underlying the software originates from [Van 't Hoff et al. 2024](https://doi.org/10.1029/2023JD040476)
 - `data/sensitivity_ozone.csv`: Empirical sensitivities (mDU / unit / year)
 - `data/taylor_param.csv`: 1st and 2nd order coefficients for altitude effect (DU / km, DU / km²)
 
