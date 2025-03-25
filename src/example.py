@@ -9,7 +9,7 @@ altitude_km = 19.0
 region = "Transatlantic_Corridor"
 emissions = {
     'NOx': 1780.0, # GgNO2/yr
-    'SOx': 73.39/44.01*12.01, # GgS/yr
+    'SOx': 73.39/44.01*12.01, # GgSO2 from Zhang et al. 2023 to GgS/yr
     'H2O': 151.31 # TgH2O/yr
 #    'Fuel': 122320.0 # Gg/yr
 }
