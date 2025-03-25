@@ -26,6 +26,14 @@ supersonic-ozone/
 
 ---
 
+## 📈 Features
+
+- Taylor expansion modeling of ozone change w.r.t. altitude
+- Emission-specific sensitivity interpolation
+- Supports multiple geographic regions
+
+---
+
 ## 🚀 Installation
 
 Install the package:
@@ -71,6 +79,20 @@ print(f"ΔF = {delta_F:.2f} DU")
 
 ---
 
+## 📚 Data Source
+
+The data underlying the software originates from [Van 't Hoff et al. 2024](https://doi.org/10.1029/2023JD040476)
+- `data/sensitivity_ozone.csv`: Empirical sensitivities (mDU / unit / year)
+- `data/taylor_param.csv`: 1st and 2nd order coefficients for altitude effect (DU / km, DU / km²)
+
+---
+
+## 📌 License
+
+Apache-2.0 or GNU GDLv3
+
+---
+
 ## 🧪 Running Tests
 
 Requires `pytest`
@@ -84,27 +106,5 @@ Then tests can be run simply after installation with
 ```bash
 pytest
 ```
-
----
-
-## 📈 Features
-
-- Taylor expansion modeling of ozone change w.r.t. altitude
-- Emission-specific sensitivity interpolation
-- Supports multiple geographic regions
-
----
-
-## 📚 Data Source
-
-The data underlying the software originates from [Van 't Hoff et al. 2024](https://doi.org/10.1029/2023JD040476)
-- `data/sensitivity_ozone.csv`: Empirical sensitivities (mDU / unit / year)
-- `data/taylor_param.csv`: 1st and 2nd order coefficients for altitude effect (DU / km, DU / km²)
-
----
-
-## 📌 License
-
-Apache-2.0 or GNU GDLv3
 
 ---
