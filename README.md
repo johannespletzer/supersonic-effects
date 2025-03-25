@@ -9,9 +9,11 @@ A Python package to model ozone column changes (ΔF) in response to various airc
 ```text
 supersonic-ozone/
 ├── src/
+│   └── example.py 
 │   └── ozone_model/
 │       ├── __init__.py
 │       └── model.py
+│       └── load_data.py
 ├── tests/
 │   └── test_model.py
 ├── data/
@@ -42,10 +44,11 @@ pip install -r requirements.txt
 
 ## 🧠 Usage
 
-### Load and calculate ozone change:
+### Calculate ozone change:
+
+Either execute the example with `python3 src/example.py` or use the following code
 
 ```python
-import pandas as pd
 from ozone_model.model import calculate_delta_F
 from ozone_model.read_data import load_data
 
