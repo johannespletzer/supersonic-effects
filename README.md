@@ -55,10 +55,6 @@ from ozone_model.read_data import load_data
 # Load data
 sensitivity_df, taylor_df = load_data()
 
-# Optional: clean column names
-sensitivity_df.columns = sensitivity_df.columns.str.strip()
-taylor_df.columns = taylor_df.columns.str.strip()
-
 # Define inputs
 altitude_km = 18.0
 region = "Transatlantic_Corridor"
