@@ -92,7 +92,6 @@ pytest
 - Taylor expansion modeling of ozone change w.r.t. altitude
 - Emission-specific sensitivity interpolation
 - Supports multiple geographic regions
-- Unit-tested with `pytest`
 
 ---
 
@@ -106,6 +105,6 @@ The data underlying the software originates from [Van 't Hoff et al. 2024](https
 
 ## 📌 License
 
-Apache-2.0
+Apache-2.0 or GNU GDLv3
 
 ---
