@@ -12,7 +12,7 @@ supersonic-ozone/
 │   └── example.py 
 │   └── ozone_model/
 │       ├── __init__.py
-│       └── model.py
+│       └── taylor_model.py
 │       └── load_data.py
 ├── tests/
 │   └── test_model.py
@@ -49,7 +49,7 @@ pip install -r requirements.txt
 Either execute the example with `python3 src/example.py` or use the following code
 
 ```python
-from ozone_model.model import calculate_delta_F
+from ozone_model.taylor_model import calculate_delta_F
 from ozone_model.read_data import load_data
 
 # Load data

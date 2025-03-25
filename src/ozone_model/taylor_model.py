@@ -72,7 +72,7 @@ def calculate_delta_F(altitude_km, emissions_dict, region, sensitivity_df, taylo
         float: ΔF value in DU.
     """
 
-    from ozone_model.model import calculate_delta_F_altitude, calculate_delta_F_emissions
+    from ozone_model.taylor_model import calculate_delta_F_altitude, calculate_delta_F_emissions
 
     # Get valid altitude bounds from the sensitivity data
     valid_altitudes = sensitivity_df["Altitude_km"].unique()

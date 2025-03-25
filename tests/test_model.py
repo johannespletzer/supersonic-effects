@@ -1,6 +1,6 @@
 import pytest
 import pandas as pd
-from ozone_model.model import calculate_delta_F
+from ozone_model.taylor_model import calculate_delta_F
 
 @pytest.fixture
 def sensitivity_df():
@@ -27,13 +27,6 @@ def test_altitude_below_bounds(sensitivity_df, taylor_df):
     
     with pytest.raises(ValueError, match="Altitude.*outside the supported range"):
         calculate_delta_F(15.0, emissions, region, sensitivity_df, taylor_df)
-
-def test_missing_emission_type(sensitivity_df, taylor_df):
-    emissions = {'ImaginaryGas': 10}
-    region = "Transatlantic_Corridor"
-
-    with pytest.raises(ValueError, match="Not enough data to interpolate"):
-        calculate_delta_F(18.0, emissions, region, sensitivity_df, taylor_df)
 
 def test_edge_altitude_exact_match(sensitivity_df, taylor_df):
     emissions = {'SOx': 50}

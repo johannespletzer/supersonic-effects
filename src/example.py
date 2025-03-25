@@ -1,4 +1,4 @@
-from ozone_model.model import calculate_delta_F, calculate_delta_F_altitude, calculate_delta_F_emissions
+from ozone_model.taylor_model import calculate_delta_F, calculate_delta_F_altitude, calculate_delta_F_emissions
 from ozone_model.read_data import load_data
 
 # Load data
