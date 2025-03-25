@@ -79,7 +79,7 @@ Requires `pytest`
 pip install pytest
 ```
 
-Tests can be run simply with after installation
+Then tests can be run simply after installation with
 
 ```bash
 pytest
