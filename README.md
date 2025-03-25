@@ -59,8 +59,9 @@ sensitivity_df, taylor_df = load_data()
 altitude_km = 18.0
 region = "Transatlantic_Corridor"
 emissions = {
-    'NOx': 100,
-    'H2O': 500
+    'NOx': 100, # GgNO2/yr
+    'SOx': 50,  # GgS/yr
+    'H2O': 500, # TgH2O/yr
 }
 
 # Calculate ozone change (ΔF)
@@ -95,7 +96,7 @@ pytest
 
 ---
 
-## 📚 Data Sources
+## 📚 Data Source
 
 The data underlying the software originates from [Van 't Hoff et al. 2024](https://doi.org/10.1029/2023JD040476)
 - `data/sensitivity_ozone.csv`: Empirical sensitivities (mDU / unit / year)
@@ -105,6 +106,6 @@ The data underlying the software originates from [Van 't Hoff et al. 2024](https
 
 ## 📌 License
 
-Apache2.0
+Apache-2.0
 
 ---
