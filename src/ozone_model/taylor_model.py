@@ -3,7 +3,7 @@ import numpy as np
 
 def calculate_delta_F_altitude(altitude_km, region, taylor_df):
     """
-    Compute first term of ΔF(𝐗,Z) (second order Taylor expansion) for a given region and altitude.
+    Compute first term of ΔF(𝐗,Z) for a given region and altitude.
 
     Parameters:
         altitude_km (float): Emission altitude (e.g., 18.0).
@@ -23,7 +23,7 @@ def calculate_delta_F_altitude(altitude_km, region, taylor_df):
 
 def calculate_delta_F_emissions(altitude_km, emissions_dict, region, sensitivity_df):
     """
-    Compute second term of ΔF(𝐗,Z) for a given region, altitude (with interpolation), and emissions.
+    Compute second term of ΔF(𝐗,Z) for a given region, altitude and emissions.
 
     Parameters:
         altitude_km (float): Emission altitude (e.g., 18.0).
@@ -59,7 +59,7 @@ def calculate_delta_F_emissions(altitude_km, emissions_dict, region, sensitivity
 
 def calculate_delta_F(altitude_km, emissions_dict, region, sensitivity_df, taylor_df):
     """
-    Compute ΔF(𝐗,Z) for a given region, altitude (with interpolation), and emissions.
+    Combine first and second order term of ΔF(𝐗,Z) for a given region, altitude and emissions.
 
     Parameters:
         altitude_km (float): Emission altitude (e.g., 18.0).
