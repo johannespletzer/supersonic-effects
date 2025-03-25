@@ -14,7 +14,7 @@ def prepare_data():
 
     return df
 
-def load_data(prepare):
+def load_data(prepare=False):
     '''Load sensitivity and taylor data from file as a pandas DataFrame'''
 
     if prepare==True:

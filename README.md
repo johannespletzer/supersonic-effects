@@ -7,7 +7,7 @@ A Python package to model ozone column changes (ΔF) in response to various airc
 ## 📦 Project Structure
 
 ```text
-your-package-name/
+supersonic-ozone/
 ├── src/
 │   └── ozone_model/
 │       ├── __init__.py
@@ -47,10 +47,10 @@ pip install -r requirements.txt
 ```python
 import pandas as pd
 from ozone_model.model import calculate_delta_F
+from ozone_model.read_data import load_data
 
 # Load data
-sensitivity_df = pd.read_csv("data/sensitivity_ozone.csv")
-taylor_df = pd.read_csv("data/taylor_param.csv")
+sensitivity_df, taylor_df = load_data()
 
 # Optional: clean column names
 sensitivity_df.columns = sensitivity_df.columns.str.strip()

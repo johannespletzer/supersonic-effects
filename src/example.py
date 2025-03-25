@@ -1,12 +1,22 @@
+import pandas as pd
 from ozone_model.model import calculate_delta_F
 from ozone_model.read_data import load_data
 
-df, df_t = load_data(prepare=False)
+# Load data
+sensitivity_df, taylor_df = load_data()
 
-emissions = {'NOx': 10, 'H2O': 20}
+# Optional: clean column names
+sensitivity_df.columns = sensitivity_df.columns.str.strip()
+taylor_df.columns = taylor_df.columns.str.strip()
+
+# Define inputs
+altitude_km = 18.0
 region = "Transatlantic_Corridor"
-altitude = 18.0 
+emissions = {
+    'NOx': 100,
+    'H2O': 500
+}
 
-delta_F = calculate_delta_F(altitude, emissions, region, df, df_t)
-
+# Calculate ozone change (ΔF)
+delta_F = calculate_delta_F(altitude_km, emissions, region, sensitivity_df, taylor_df)
 print(f"ΔF = {delta_F:.2f} DU")
