@@ -17,7 +17,7 @@ def prepare_data(filepath):
 def load_data(prepare=False):
     '''Load sensitivity and taylor data from file as a pandas DataFrame'''
 
-    if prepare==True:
+    if prepare:
         df = prepare_data('./data/sensitivity_ozone.csv')
         df_t = prepare_data('./data/taylor_param.csv')
     else:
