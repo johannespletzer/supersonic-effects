@@ -61,11 +61,13 @@ from ozone_model.taylor_model import calculate_delta_F
 from ozone_model.read_data import load_data
 
 # Load data
-sensitivity_df, taylor_df = load_data()
+sensitivity_df, taylor_df = load_data(prepare=False)
 
 # Define inputs
+# Regions: Transatlantic_Corridor, South_Arabian_Sea or Mean (latter requires prepare=True)
+# Altitude: min 16.2, max 20.4 km
+region = "Transatlantic_Corridor" 
 altitude_km = 18.0
-region = "Transatlantic_Corridor"
 emissions = {
     'NOx': 100, # GgNO2/yr
     'SOx': 50,  # GgS/yr
