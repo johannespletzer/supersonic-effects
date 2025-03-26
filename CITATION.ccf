@@ -1,0 +1,41 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: supersonic-ozone
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Johannes
+    family-names: Pletzer
+    email: johannes.pletzer@dlr.de
+    affiliation: DLR
+    orcid: 'https://orcid.org/0000-0003-3210-3496'
+  - given-names: Jurriaan
+    family-names: Van 't Hoff
+    email: J.A.vantHoff@tudelft.nl
+    affiliation: TU Delft
+    orcid: 'https://orcid.org/0000-0002-7761-7055'
+  - given-names: Volker
+    family-names: Grewe
+    email: volker.grewe@dlr.de
+    affiliation: 'DLR, TU Delft'
+    orcid: 'https://orcid.org/0000-0002-8012-6783'
+repository-code: 'https://github.com/johannespletzer/supersonic-ozone'
+abstract: >-
+  A Python package to model ozone column changes (ΔF) in
+  response to various aircraft emissions at different
+  altitudes over specific regions. The model combines
+  empirical emission sensitivities with a Taylor expansion
+  in altitude to estimate total ozone impact.
+keywords:
+  - supersonic
+  - aircraft
+  - ozone
+  - emission
+  - stratosphere
+  - response model
+license: AGPL-3.0
+version: '0.1'

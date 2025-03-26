@@ -1,0 +1,9 @@
+pandas
+numpy
+
+# Testing and coverage
+pytest
+pytest-cov
+
+# Linting
+ruff
