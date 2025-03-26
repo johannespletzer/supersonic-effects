@@ -1,4 +1,3 @@
-import pandas as pd
 import numpy as np
 
 def calculate_delta_F_altitude(altitude_km, region, taylor_df):
