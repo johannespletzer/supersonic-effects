@@ -42,12 +42,6 @@ Install the package:
 pip install -e .
 ```
 
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
 ---
 
 ## 🧠 Usage
