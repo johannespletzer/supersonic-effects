@@ -4,7 +4,13 @@ version = "0.1"
 description = "Modeling ozone changes from supersonic aircraft emissions"
 readme = "README.md"
 requires-python = ">=3.8"
-dependencies = []
+dependencies = [
+    "numpy",
+    "pandas",
+    "pytest",
+    "pytest-cov",
+    "ruff"
+]
 
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
