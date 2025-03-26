@@ -1,1 +1,1 @@
-pip install pandas scipy
+pip install pandas scipy pytest pytest-cov ruff
