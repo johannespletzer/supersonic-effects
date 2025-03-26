@@ -1,10 +1,10 @@
 import pandas as pd
 
-def prepare_data():
+def prepare_data(filepath):
     '''Calculate mean, min, max columns'''
 
     # Read data
-    df = pd.read_csv('./data/sensitivity_ozone.csv', sep=', ', engine='python')
+    df = pd.read_csv(filepath, sep=', ', engine='python')
 
     # Average and range
     df['Mean']    = df[['Transatlantic_Corridor','South_Arabian_Sea']].mean(axis=1)
@@ -18,10 +18,11 @@ def load_data(prepare=False):
     '''Load sensitivity and taylor data from file as a pandas DataFrame'''
 
     if prepare==True:
-        df = prepare_data()
+        df = prepare_data('./data/sensitivity_ozone.csv')
+        df_t = prepare_data('./data/taylor_param.csv')
     else:
         df = pd.read_csv('./data/sensitivity_ozone.csv', sep=', ', engine='python')
-
-    df_t = pd.read_csv("./data/taylor_param.csv", sep=', ', engine='python')
+        df_t = pd.read_csv("./data/taylor_param.csv", sep=', ', engine='python')
+    print(df)
 
     return df, df_t
