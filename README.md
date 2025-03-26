@@ -88,19 +88,3 @@ The data underlying the software originates from [Van 't Hoff et al. 2024](https
 - `data/taylor_param.csv`: 1st and 2nd order coefficients for altitude effect (DU / km, DU / km²)
 
 ---
-
-## 🧪 Running Tests
-
-Requires `pytest`
-
-```bash
-pip install pytest
-```
-
-Then tests can be run simply after installation with
-
-```bash
-pytest
-```
-
----
