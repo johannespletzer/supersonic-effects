@@ -14,8 +14,8 @@ def calculate_delta_F_altitude(altitude_km, region, taylor_df):
     """
 
     # Altitude-based term using Taylor expansion
-    first_order = float(taylor_df.loc[taylor_df['Parameter'].str.contains("1st"), region])
-    second_order = float(taylor_df.loc[taylor_df['Parameter'].str.contains("2nd"), region])
+    first_order = float(taylor_df.loc[taylor_df['Parameter'].str.contains("1st"), region].iloc[0])
+    second_order = float(taylor_df.loc[taylor_df['Parameter'].str.contains("2nd"), region].iloc[0])
     delta_F_altitude = altitude_km * (first_order + (altitude_km / 2) * second_order)
 
     return delta_F_altitude
