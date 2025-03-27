@@ -23,6 +23,5 @@ def load_data(prepare=False):
     else:
         df = pd.read_csv('./data/sensitivity_ozone.csv', sep=', ', engine='python')
         df_t = pd.read_csv("./data/taylor_param.csv", sep=', ', engine='python')
-    print(df)
 
     return df, df_t

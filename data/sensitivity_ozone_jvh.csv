@@ -1,0 +1,9 @@
+Emission, Altitude_km, Transatlantic_Corridor, South_Arabian_Sea, Units
+NOx, 20.4, -2.35, -4.29, mDU / Gg(NO2)/yr
+NOx, 16.2,  2.09, 2.00, mDU / Gg(NO2)/yr
+SOx, 20.4, -34.56, -39.64, mDU / Gg(S)/yr
+SOx, 16.2, -21.97, -16.77, mDU / Gg(S)/yr
+H2O, 20.4, -7.87, -11.19, mDU / Tg(H2O)/yr
+H2O, 16.2, -1.42, 0.00, mDU / Tg(H2O)/yr
+!Fuel, 20.4, -72.97, -115.16, mDU / Gg/yr
+!Fuel, 16.2,  22.71, 1.06, mDU / Gg/yr
