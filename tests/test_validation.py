@@ -1,6 +1,5 @@
 import pytest
 import pandas as pd
-from ozone_model.read_data import load_data
 from ozone_model.taylor_model import calculate_delta_F_emissions
 
 @pytest.fixture
@@ -9,7 +8,6 @@ def sensitivity_df():
 
 def test_calculate_delta_F_emissions(sensitivity_df):
     emissions = {'NO':43.2, 'SO':2.8224, 'H2O':3.36}
-    altitudes = [16.2, 20.4]
     region_map = {'TAC':'Transatlantic_Corridor', 'SAS':'South_Arabian_Sea'}
 
     expected_delta_O3 = {
