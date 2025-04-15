@@ -1,13 +1,13 @@
-# Ozone Sensitivity Modeling
+# Ozone and Radiation Sensitivity Modeling
 
-A Python package to model ozone column changes (ΔF) in response to various aircraft emissions at different altitudes over specific regions. The model combines empirical emission sensitivities with a Taylor expansion in altitude to estimate total ozone impact.
+A Python package to model ozone column changes and radiative effects in response to various aircraft emissions at different altitudes over specific regions. The model combines empirical emission sensitivities with a Taylor expansion in altitude to estimate effects of supersonic transport on ozone and radiation.
 
 ---
 
 ## 📦 Project Structure
 
 ```text
-supersonic-ozone/
+supersonic-effects/
 ├── src/
 │   └── example.py 
 │   └── ozone_model/
