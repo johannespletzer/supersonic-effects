@@ -19,12 +19,12 @@ message: >-
   metadata from this file.
 type: software
 abstract: >-
-  A Python package to model ozone column changes (ΔF) in
-  response to various aircraft emissions at different
+  A Python package to model ozone column changes and radiative
+  effects in response to various aircraft emissions at different
   altitudes over specific regions. The model combines
   empirical emission sensitivities with a Taylor expansion
-  in altitude to estimate total ozone impact.
-repository-code: 'https://github.com/johannespletzer/supersonic-ozone'
+  in altitude to estimate effects on ozone and radiation.
+repository-code: 'https://github.com/johannespletzer/supersonic-effects'
 keywords:
   - supersonic
   - aircraft
@@ -32,6 +32,8 @@ keywords:
   - emission
   - stratosphere
   - response model
+  - sensitivities
+  - atmosphere
 license: AGPL-3.0
 version: '0.1'
 cff-version: 1.2.0
