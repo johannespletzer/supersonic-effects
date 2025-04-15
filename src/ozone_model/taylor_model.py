@@ -1,6 +1,6 @@
 import numpy as np
 
-def calculate_delta_F_altitude(altitude_km, region, taylor_df):
+def calculate_delta_F_altitude(altitude_km, region, taylor_df, ref_km=18.3):
     """
     Compute first term of ΔF(𝐗,Z) for a given region and altitude.
 
@@ -8,6 +8,7 @@ def calculate_delta_F_altitude(altitude_km, region, taylor_df):
         altitude_km (float): Emission altitude (e.g., 18.0).
         region (str): 'Transatlantic_Corridor' or 'South_Arabian_Sea'.
         taylor_df (pd.DataFrame): Loaded from taylor_param.csv.
+        ref_km (float): Emission altitude of Taylor expansion reference.
 
     Returns:
         float: ΔF value in DU.
@@ -16,7 +17,7 @@ def calculate_delta_F_altitude(altitude_km, region, taylor_df):
     # Altitude-based term using Taylor expansion
     first_order = float(taylor_df.loc[taylor_df['Parameter'].str.contains("1st"), region].iloc[0])
     second_order = float(taylor_df.loc[taylor_df['Parameter'].str.contains("2nd"), region].iloc[0])
-    delta_F_altitude = altitude_km * (first_order + (altitude_km / 2) * second_order)
+    delta_F_altitude = ((altitude_km-ref_km) * (first_order + (altitude_km-ref_km) / 2) * second_order)
 
     return delta_F_altitude
 
@@ -56,7 +57,7 @@ def calculate_delta_F_emissions(altitude_km, emissions_dict, region, sensitivity
 
     return delta_F_emissions
 
-def calculate_delta_F(altitude_km, emissions_dict, region, sensitivity_df, taylor_df):
+def calculate_delta_F(altitude_km, emissions_dict, region, sensitivity_df, taylor_df, ref_km=18.3):
     """
     Combine first and second order term of ΔF(𝐗,Z) for a given region, altitude and emissions.
 
@@ -66,6 +67,7 @@ def calculate_delta_F(altitude_km, emissions_dict, region, sensitivity_df, taylo
         region (str): 'Transatlantic_Corridor' or 'South_Arabian_Sea'.
         sensitivity_df (pd.DataFrame): Loaded from sensitivity_ozone.csv.
         taylor_df (pd.DataFrame): Loaded from taylor_param.csv.
+        ref_km (float): Emission altitude of Taylor expansion reference.
 
     Returns:
         float: ΔF value in DU.
@@ -81,7 +83,7 @@ def calculate_delta_F(altitude_km, emissions_dict, region, sensitivity_df, taylo
         raise ValueError(f"Altitude {altitude_km} km is outside the supported range: {z_min}–{z_max} km")
 
     # 1. Altitude-based term using Taylor expansion
-    delta_F_altitude = calculate_delta_F_altitude(altitude_km, region, taylor_df)
+    delta_F_altitude = calculate_delta_F_altitude(altitude_km, region, taylor_df, ref_km)
 
     # 2. Emission-based term with interpolation
     delta_F_emissions = calculate_delta_F_emissions(altitude_km, emissions_dict, region, sensitivity_df)

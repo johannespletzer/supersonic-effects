@@ -8,7 +8,7 @@ sensitivity_df, taylor_df = load_data(prepare=True)
 #altitude_km = 19.
 altitude_km = 16.2
 #altitude_km = 20.4
-delta_km = 0.
+reference_km = 18.3 
 region = "Transatlantic_Corridor" # Options: Transatlantic corridor, South_Arabian_Sea, Mean
 #region = "South_Arabian_Sea" # Options: Transatlantic corridor, South_Arabian_Sea, Mean
 emissions = {
@@ -32,9 +32,9 @@ emissions = {
 }
 
 # Calculate ozone change (ΔF), first and second term
-#delta_F = calculate_delta_F(altitude_km, delta_km, emissions, region, sensitivity_df, taylor_df)
-#delta_F_alt = calculate_delta_F_altitude(delta_km, region, taylor_df)
+delta_F = calculate_delta_F(altitude_km, emissions, region, sensitivity_df, taylor_df, reference_km)
+delta_F_alt = calculate_delta_F_altitude(altitude_km, region, taylor_df, reference_km)
 delta_F_emis = calculate_delta_F_emissions(altitude_km, emissions, region, sensitivity_df)
 
-#print(f"ΔF = {delta_F:.3f} DU,",f"ΔF(alt) = {delta_F_alt:.3f} DU,",f"ΔF(emis) = {delta_F_emis:.3f} DU")
-print(f"ΔF(emis) = {delta_F_emis:.3f} DU")
+print(f"ΔF = {delta_F:.3f} DU,",f"ΔF(alt) = {delta_F_alt:.3f} DU,",f"ΔF(emis) = {delta_F_emis:.3f} DU")
+#print(f"ΔF(emis) = {delta_F_emis:.3f} DU")
