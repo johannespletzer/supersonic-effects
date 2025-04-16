@@ -111,7 +111,7 @@ def calculate_delta_F(altitude_km, emissions_dict, region, sensitivity_df, taylo
 
     # 2. Emission-based term with interpolation
     if mode == "Ozone":
-        delta_F_emissions = calculate_delta_F_emissions(altitude_km, emissions_dict, region, sensitivity_df_o3,mode)
+        delta_F_emissions = calculate_delta_F_emissions(altitude_km, emissions_dict, region, sensitivity_df_o3, mode)
     elif mode == "Radiative_Forcing":
         delta_F_emissions = calculate_delta_F_emissions(altitude_km, emissions_dict, region, sensitivity_df_rf, mode)
     else:
