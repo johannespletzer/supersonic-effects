@@ -10,7 +10,7 @@ A Python package to model ozone column changes and radiative effects in response
 supersonic-effects/
 ├── src/
 │   └── example.py 
-│   └── ozone_model/
+│   └── response_model/
 │       ├── __init__.py
 │       └── taylor_model.py
 │       └── load_data.py
