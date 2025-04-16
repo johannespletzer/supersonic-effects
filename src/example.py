@@ -1,5 +1,5 @@
-from ozone_model.taylor_model import calculate_delta_F, calculate_delta_F_altitude, calculate_delta_F_emissions, calculate_delta_F_single
-from ozone_model.read_data import load_data
+from response_model.taylor_model import calculate_delta_F, calculate_delta_F_altitude, calculate_delta_F_emissions
+from response_model.read_data import load_data
 
 # Load data
 sensitivity_df_o3, sensitivity_df_rf, taylor_df = load_data(prepare=True)
