@@ -18,10 +18,12 @@ def load_data(prepare=False):
     '''Load sensitivity and taylor data from file as a pandas DataFrame'''
 
     if prepare:
-        df = prepare_data('./data/sensitivity_ozone.csv')
+        df_o3 = prepare_data('./data/sensitivity_ozone.csv')
+        df_rf = prepare_data('./data/sensitivity_radiative_forcing.csv')
         df_t = prepare_data('./data/taylor_param.csv')
     else:
-        df = pd.read_csv('./data/sensitivity_ozone.csv', sep=', ', engine='python')
-        df_t = pd.read_csv("./data/taylor_param.csv", sep=', ', engine='python')
+        df_o3 = pd.read_csv('./data/sensitivity_ozone.csv', sep=', ', engine='python')
+        df_rf = pd.read_csv('./data/sensitivity_radiative_forcing.csv', sep=', ', engine='python')
+        df_t = pd.read_csv('./data/taylor_param.csv', sep=', ', engine='python')
 
-    return df, df_t
+    return df_o3, df_rf, df_t
