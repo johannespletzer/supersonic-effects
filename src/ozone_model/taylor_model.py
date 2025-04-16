@@ -1,6 +1,6 @@
 import numpy as np
 
-def calculate_delta_F_altitude(altitude_km, region, taylor_df, ref_km=18.3,mode="Ozone"):
+def calculate_delta_F_altitude(altitude_km, region, taylor_df, ref_km=18.3, mode="Ozone"):
     """
     Compute first term of ΔF(𝐗,Z) for a given region and altitude.
 
