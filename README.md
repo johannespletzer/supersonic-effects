@@ -4,7 +4,7 @@ A Python package to model ozone column changes and radiative effects in response
 
 ---
 
-## 📦 Project Structure
+## Project Structure
 
 ```text
 supersonic-effects/
@@ -28,7 +28,7 @@ supersonic-effects/
 
 ---
 
-## 📈 Features
+## Features
 
 - Taylor expansion modeling of ozone change w.r.t. altitude
 - Emission-specific sensitivity interpolation
@@ -36,7 +36,7 @@ supersonic-effects/
 
 ---
 
-## 🚀 Installation
+## Installation
 
 Install the package:
 
@@ -46,7 +46,7 @@ pip install -e .
 
 ---
 
-## 🧠 Usage
+## Usage
 
 ### Calculate ozone change:
 
@@ -72,7 +72,7 @@ print(f"ΔF = {delta_F:.2f} DU")
 
 ---
 
-## 📚 Data Source
+## Data Source
 
 The data underlying the software originates from [Van 't Hoff et al. 2024](https://doi.org/10.1029/2023JD040476)
 - `data/sensitivity_ozone.csv`: Empirical sensitivities (mDU / unit / year)
