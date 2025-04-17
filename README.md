@@ -9,11 +9,13 @@ A Python package to model ozone column changes and radiative effects in response
 ```text
 supersonic-effects/
 ├── src/
-│   └── example.py 
 │   └── response_model/
 │       ├── __init__.py
 │       └── taylor_model.py
 │       └── load_data.py
+├── scripts/
+│   └── example.py 
+│   └── test*.py 
 ├── tests/
 │   └── test_model.py
 │   └── test_validation*.py
@@ -50,7 +52,7 @@ pip install -e .
 
 ### Calculate ozone change:
 
-Either execute the example with `python3 src/example.py` or use the following code
+Either execute the example with `python3 scripts/example.py` or use the following code
 
 ```python
 from response_model.taylor_model import calculate_delta_F
