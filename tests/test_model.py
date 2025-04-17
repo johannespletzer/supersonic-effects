@@ -1,5 +1,3 @@
-import pytest
-import pandas as pd
 from response_model.taylor_model import calculate_delta_F
 
 def test_valid_calculation():

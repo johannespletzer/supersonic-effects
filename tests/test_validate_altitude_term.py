@@ -1,7 +1,7 @@
 import pytest
 from response_model.taylor_model import calculate_delta_F_altitude
 
-def test_calculate_delta_F_altitude():
+def test_calculate_delta_F_altitude_O3():
     region_map = {'TAC':'Transatlantic_Corridor', 'SAS':'South_Arabian_Sea'}
 
     expected_delta_O3 = {
@@ -14,7 +14,6 @@ def test_calculate_delta_F_altitude():
     for key, expected_value in expected_delta_O3.items():
         region, altitude_species = key[:3], key[3:]
         altitude = float(altitude_species[:3]) / 10
-        species = altitude_species.split('_')[1]
         mapped_region = region_map[region]
 
         calculated_value = calculate_delta_F_altitude(altitude, mapped_region, mode='Ozone')
@@ -33,7 +32,6 @@ def test_calculate_delta_F_altitude():
     for key, expected_value in expected_delta.items():
         region, altitude_species = key[:3], key[3:]
         altitude = float(altitude_species[:3]) / 10
-        species = altitude_species.split('_')[1]
         mapped_region = region_map[region]
 
         calculated_value = calculate_delta_F_altitude(altitude, mapped_region, mode='Radiative_Forcing')
