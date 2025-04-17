@@ -21,10 +21,6 @@ def test_calculate_delta_F_emissions_o3():
         calculated_value = calculate_delta_F_emissions(altitude, {species: emissions[species]}, mapped_region, mode='Ozone')
         assert pytest.approx(calculated_value, abs=1e-3) == expected_value
 
-@pytest.fixture
-def sensitivity_df():
-    return pd.read_csv('./data/sensitivity_radiative_forcing.csv', sep=', ', engine='python')
-
 def test_calculate_delta_F_emissions():
     emissions = {'NO':43.2, 'SO':2.8224, 'H2O':3.36}
     region_map = {'TAC':'Transatlantic_Corridor', 'SAS':'South_Arabian_Sea'}
