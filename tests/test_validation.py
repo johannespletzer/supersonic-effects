@@ -1,6 +1,6 @@
 import pytest
 import pandas as pd
-from ozone_model.taylor_model import calculate_delta_F_emissions
+from response_model.taylor_model import calculate_delta_F_emissions
 
 @pytest.fixture
 def sensitivity_df():
