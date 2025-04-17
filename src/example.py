@@ -4,6 +4,11 @@ from response_model.taylor_model import calculate_delta_F, calculate_delta_F_alt
 #altitude_km = 19.
 altitude_km = 16.2
 #altitude_km = 20.4
+
+# Define inputs
+#altitude_km = 19.
+altitude_km = 16.2
+#altitude_km = 20.4
 reference_km = 18.3 
 region = "Transatlantic_Corridor" # Options: Transatlantic corridor, South_Arabian_Sea, Mean
 #region = "South_Arabian_Sea" # Options: Transatlantic corridor, South_Arabian_Sea, Mean
