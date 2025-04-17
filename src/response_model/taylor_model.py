@@ -1,6 +1,9 @@
 import numpy as np
 
-def calculate_delta_F_altitude(altitude_km, region, initial_emis_alt=18.3, mode="Ozone"):
+
+def calculate_delta_F_altitude(
+    altitude_km, region, initial_emis_alt=18.3, mode="Ozone"
+):
     """
     Compute first term of ΔF(𝐗,Z) for a given region and altitude.
 
@@ -15,6 +18,7 @@ def calculate_delta_F_altitude(altitude_km, region, initial_emis_alt=18.3, mode=
     """
 
     from response_model.read_data import load_data
+
     _, taylor_df = load_data(prepare=True, mode=mode)
 
     # Convert pure altitude to relative altitude change from the reference
@@ -25,14 +29,29 @@ def calculate_delta_F_altitude(altitude_km, region, initial_emis_alt=18.3, mode=
     delta_altitude_183 = altitude_change + relative_altitude_183
 
     # Altitude-based term using Taylor expansion
-    first_order = float(taylor_df.loc[taylor_df['Parameter'].str.contains(f"1st order Altitude {mode}"), region].iloc[0])
-    second_order = float(taylor_df.loc[taylor_df['Parameter'].str.contains(f"2nd order Altitude {mode}"), region].iloc[0])
-    delta_F_altitude = delta_altitude_183 * (first_order) + ((delta_altitude_183**2) / 2) * second_order
+    first_order = float(
+        taylor_df.loc[
+            taylor_df["Parameter"].str.contains(f"1st order Altitude {mode}"), region
+        ].iloc[0]
+    )
+    second_order = float(
+        taylor_df.loc[
+            taylor_df["Parameter"].str.contains(f"2nd order Altitude {mode}"), region
+        ].iloc[0]
+    )
+    delta_F_altitude = (
+        delta_altitude_183 * (first_order)
+        + ((delta_altitude_183**2) / 2) * second_order
+    )
 
     # If the reference altitude is not exactly 18.3 km, correct or the bias introduced to the curve
-    delta_F_altitude -= relative_altitude_183 * (first_order) + ((relative_altitude_183**2) / 2) * second_order
+    delta_F_altitude -= (
+        relative_altitude_183 * (first_order)
+        + ((relative_altitude_183**2) / 2) * second_order
+    )
 
     return delta_F_altitude
+
 
 def calculate_delta_F_emissions(altitude_km, emissions_dict, region, mode="Ozone"):
     """
@@ -49,6 +68,7 @@ def calculate_delta_F_emissions(altitude_km, emissions_dict, region, mode="Ozone
     """
 
     from response_model.read_data import load_data
+
     sensitivity_df, _ = load_data(prepare=True, mode=mode)
 
     # Get valid altitude bounds from the sensitivity data
@@ -56,15 +76,17 @@ def calculate_delta_F_emissions(altitude_km, emissions_dict, region, mode="Ozone
     z_min, z_max = valid_altitudes.min(), valid_altitudes.max()
 
     if not (z_min <= altitude_km <= z_max):
-        raise Warning(f"Altitude {altitude_km} km is outside the supported range: {z_min}–{z_max} km, the estimate will have higher uncertainty!")
+        raise Warning(
+            f"Altitude {altitude_km} km is outside the supported range: {z_min}–{z_max} km, the estimate will have higher uncertainty!"
+        )
 
     # Emission-based term with interpolation
     delta_F_emissions = 0.0
     for emission_type, x_i in emissions_dict.items():
         # Get all rows matching this emission type
-        rows = sensitivity_df[sensitivity_df['Emission'] == emission_type]
+        rows = sensitivity_df[sensitivity_df["Emission"] == emission_type]
 
-        if emission_type not in sensitivity_df['Emission'].unique():
+        if emission_type not in sensitivity_df["Emission"].unique():
             raise ValueError(f"Emission type '{emission_type}' not found in data.")
 
         # Sort by altitude to ensure interpolation works
@@ -77,11 +99,18 @@ def calculate_delta_F_emissions(altitude_km, emissions_dict, region, mode="Ozone
         # Interpolate
         sensitivity_interp = np.interp(altitude_km, altitudes, sensitivities)
         # In Ozone mode convert the value from mDU to DU.
-        delta_F_emissions += x_i * sensitivity_interp / 1000.0 if mode == "Ozone" else x_i * sensitivity_interp
+        delta_F_emissions += (
+            x_i * sensitivity_interp / 1000.0
+            if mode == "Ozone"
+            else x_i * sensitivity_interp
+        )
 
     return delta_F_emissions
 
-def calculate_delta_F(altitude_km, emissions_dict, region, initial_emis_alt=18.3, mode="Ozone"):
+
+def calculate_delta_F(
+    altitude_km, emissions_dict, region, initial_emis_alt=18.3, mode="Ozone"
+):
     """
     Combine first and second order term of ΔF(𝐗,Z) for a given region, altitude and emissions.
 
@@ -94,20 +123,30 @@ def calculate_delta_F(altitude_km, emissions_dict, region, initial_emis_alt=18.3
     Returns:
         float: ΔF value in DU or mW/m2.
     """
-    from response_model.taylor_model import calculate_delta_F_altitude, calculate_delta_F_emissions
+    from response_model.taylor_model import (
+        calculate_delta_F_altitude,
+        calculate_delta_F_emissions,
+    )
 
     # 1. Altitude-based term using Taylor expansion
-    delta_F_altitude = calculate_delta_F_altitude(altitude_km, region, initial_emis_alt, mode)
+    delta_F_altitude = calculate_delta_F_altitude(
+        altitude_km, region, initial_emis_alt, mode
+    )
 
     # 2. Emission-based term with interpolation
-    delta_F_emissions = calculate_delta_F_emissions(altitude_km, emissions_dict, region, mode)
+    delta_F_emissions = calculate_delta_F_emissions(
+        altitude_km, emissions_dict, region, mode
+    )
 
     # 3. Total
     delta_F_total = delta_F_altitude + delta_F_emissions
 
     return delta_F_total
 
-def calculate_delta_F_single(reference_altitude_km, change_altitude_km, change_in_emissions, region, mode="Ozone"):
+
+def calculate_delta_F_single(
+    reference_altitude_km, change_altitude_km, change_in_emissions, region, mode="Ozone"
+):
     """
     Combine first and second order term of ΔF(𝐗,Z) for a given region, altitude and emissions.
 
@@ -123,34 +162,60 @@ def calculate_delta_F_single(reference_altitude_km, change_altitude_km, change_i
     """
     # Load the underlying data from the csv files
     from response_model.read_data import load_data
+
     sensitivity_df_o3, sensitivity_df_rf, taylor_df = load_data(prepare=True)
 
     # Check whether the input arguments are as expected
-    if mode not in ["Ozone","Radiative_Forcing"]:
+    if mode not in ["Ozone", "Radiative_Forcing"]:
         raise ValueError("mode keyword should be either Ozone or Radiative_Forcing!")
     if region not in ["Transatlantic_Corridor", "South_Arabian_Sea"]:
-        raise ValueError("region keyword should be either Transatlantic_Corridor or South_Arabian_Sea")
+        raise ValueError(
+            "region keyword should be either Transatlantic_Corridor or South_Arabian_Sea"
+        )
 
     # Get valid altitude bounds from the sensitivity data
     valid_altitudes = sensitivity_df_o3["Altitude_km"].unique()
     z_min, z_max = valid_altitudes.min(), valid_altitudes.max()
     # Check whether the new altitude is within these bounds, if not raise a warning.
     if not (z_min <= reference_altitude_km + change_altitude_km <= z_max):
-        raise Warning(f"Altitude {reference_altitude_km + change_altitude_km} km is outside the supported range: {z_min}–{z_max} km, the estimate will have higher uncertainty!")
+        raise Warning(
+            f"Altitude {reference_altitude_km + change_altitude_km} km is outside the supported range: {z_min}–{z_max} km, the estimate will have higher uncertainty!"
+        )
 
     # Calculate relative altitudes
-    relative_altitude_183 = reference_altitude_km - 18.3 # The taylor curve is calculated around an altitude of 18.3 km
-    relative_altitude_162 = reference_altitude_km - 16.2 # The sensitivities are interpolated from an altitude of 16.2 km
-    delta_altitude_183 = change_altitude_km + relative_altitude_183 # New altitude relative to 18.3 km
-    delta_altitude_162 = change_altitude_km + relative_altitude_162 # New altitude relative to 16.2 km
+    relative_altitude_183 = (
+        reference_altitude_km - 18.3
+    )  # The taylor curve is calculated around an altitude of 18.3 km
+    relative_altitude_162 = (
+        reference_altitude_km - 16.2
+    )  # The sensitivities are interpolated from an altitude of 16.2 km
+    delta_altitude_183 = (
+        change_altitude_km + relative_altitude_183
+    )  # New altitude relative to 18.3 km
+    delta_altitude_162 = (
+        change_altitude_km + relative_altitude_162
+    )  # New altitude relative to 16.2 km
 
     ### 1. Altitude-based term using Taylor expansion
-    first_order = float(taylor_df.loc[taylor_df['Parameter'].str.contains(f"1st order Altitude {mode}"), region].iloc[0])
-    second_order = float(taylor_df.loc[taylor_df['Parameter'].str.contains(f"2nd order Altitude {mode}"), region].iloc[0])
-    delta_F_altitude = delta_altitude_183 * (first_order) + (delta_altitude_183**2)/2 * second_order
+    first_order = float(
+        taylor_df.loc[
+            taylor_df["Parameter"].str.contains(f"1st order Altitude {mode}"), region
+        ].iloc[0]
+    )
+    second_order = float(
+        taylor_df.loc[
+            taylor_df["Parameter"].str.contains(f"2nd order Altitude {mode}"), region
+        ].iloc[0]
+    )
+    delta_F_altitude = (
+        delta_altitude_183 * (first_order) + (delta_altitude_183**2) / 2 * second_order
+    )
 
     # If the initial reference altitude is not exactly 18.3 km, compensate by subtracting the bias
-    delta_F_altitude -= (relative_altitude_183 * (first_order) + (relative_altitude_183**2)/2 * second_order)
+    delta_F_altitude -= (
+        relative_altitude_183 * (first_order)
+        + (relative_altitude_183**2) / 2 * second_order
+    )
 
     ### 2. Emission-based term with interpolation
     # Select the right sensitivity dataframe
@@ -158,18 +223,25 @@ def calculate_delta_F_single(reference_altitude_km, change_altitude_km, change_i
 
     # Interpolate sensitivities to the requested (new) emission altitude
     sensitivities = {
-        'NO': df_sensitivities.loc[1][region] + (
-                df_sensitivities.loc[0][region] - df_sensitivities.loc[1][region]) / 4.2 * delta_altitude_162,
-        'SO': df_sensitivities.loc[3][region] + (df_sensitivities.loc[2][region] - df_sensitivities.loc[3][
-                         region]) / 4.2 * delta_altitude_162,
-        'H2O': df_sensitivities.loc[5][region] + (
-                    df_sensitivities.loc[4][region] - df_sensitivities.loc[5][region]) / 4.2 * delta_altitude_162}
+        "NO": df_sensitivities.loc[1][region]
+        + (df_sensitivities.loc[0][region] - df_sensitivities.loc[1][region])
+        / 4.2
+        * delta_altitude_162,
+        "SO": df_sensitivities.loc[3][region]
+        + (df_sensitivities.loc[2][region] - df_sensitivities.loc[3][region])
+        / 4.2
+        * delta_altitude_162,
+        "H2O": df_sensitivities.loc[5][region]
+        + (df_sensitivities.loc[4][region] - df_sensitivities.loc[5][region])
+        / 4.2
+        * delta_altitude_162,
+    }
 
     # Loop over the emissions in the change_in_emissions dictionary, and calculate their respective effect on the F metric
     delta_F_emissions = {}
     delta_F_emissions_total = 0
     for emission_type, x_i in change_in_emissions.items():
-        if emission_type not in df_sensitivities['Emission'].unique():
+        if emission_type not in df_sensitivities["Emission"].unique():
             raise ValueError(f"Emission type '{emission_type}' not found in data.")
 
         # Calculate effect of changes in emissions
@@ -182,12 +254,15 @@ def calculate_delta_F_single(reference_altitude_km, change_altitude_km, change_i
         for k in delta_F_emissions.keys():
             delta_F_emissions[k] /= 1000
 
-
     # 3. Total
     delta_F_total = delta_F_altitude + delta_F_emissions_total
 
     # Prepare output dictionary (To allow outputting separate terms as well)
-    output_dict = {"Total": delta_F_total, "Altitude_term": delta_F_altitude, "Emissions_term": delta_F_emissions_total,
-                   "Speciated_emissions": delta_F_emissions}
+    output_dict = {
+        "Total": delta_F_total,
+        "Altitude_term": delta_F_altitude,
+        "Emissions_term": delta_F_emissions_total,
+        "Speciated_emissions": delta_F_emissions,
+    }
 
     return output_dict
