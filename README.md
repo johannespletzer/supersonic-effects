@@ -16,13 +16,14 @@ supersonic-effects/
 │       └── load_data.py
 ├── tests/
 │   └── test_model.py
-│   └── test_validation.py
+│   └── test_validation*.py
 ├── data/
-│   ├── sensitivity_ozone.csv
-│   └── taylor_param.csv
+│   ├── sensitivity_*.csv
+│   └── taylor_param_*.csv
 ├── README.md
 ├── requirements.txt
 ├── pyproject.toml
+...
 ```
 
 ---
@@ -52,25 +53,20 @@ pip install -e .
 Either execute the example with `python3 src/example.py` or use the following code
 
 ```python
-from ozone_model.taylor_model import calculate_delta_F
-from ozone_model.read_data import load_data
-
-# Load data
-sensitivity_df, taylor_df = load_data(prepare=False)
+from response_model.taylor_model import calculate_delta_F
 
 # Define inputs
 # Regions: Transatlantic_Corridor, South_Arabian_Sea or Mean (latter requires prepare=True)
-# Altitude: min 16.2, max 20.4 km
 region = "Transatlantic_Corridor" 
 altitude_km = 18.0
 emissions = {
-    'NOx': 100, # GgNO2/yr
-    'SOx': 50,  # GgS/yr
+    'NO': 100, # GgNO2/yr
+    'SO': 50,  # GgS/yr
     'H2O': 500, # TgH2O/yr
 }
 
 # Calculate ozone change (ΔF)
-delta_F = calculate_delta_F(altitude_km, emissions, region, sensitivity_df, taylor_df)
+delta_F = calculate_delta_F(altitude_km, emissions, region, mode='Ozone')
 print(f"ΔF = {delta_F:.2f} DU")
 ```
 
@@ -80,6 +76,8 @@ print(f"ΔF = {delta_F:.2f} DU")
 
 The data underlying the software originates from [Van 't Hoff et al. 2024](https://doi.org/10.1029/2023JD040476)
 - `data/sensitivity_ozone.csv`: Empirical sensitivities (mDU / unit / year)
-- `data/taylor_param.csv`: 1st and 2nd order coefficients for altitude effect (DU / km, DU / km²)
+- `data/sensitivity_radiative_forcing.csv`: Empirical sensitivities (mW/m2 / unit / year)
+- `data/taylor_param_ozone.csv`: 1st and 2nd order coefficients for altitude effect (DU / km, DU / km²)
+- `data/taylor_param_radiative_forcing.csv`: 1st and 2nd order coefficients for altitude effect (mW/m2 / km, mW/m2 / km²)
 
 ---

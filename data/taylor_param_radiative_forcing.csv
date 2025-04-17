@@ -1,0 +1,5 @@
+Parameter, Transatlantic_Corridor, South_Arabian_Sea, Units
+1st order Altitude Ozone, -0.14822104, -0.23881208, DU / km
+2nd order Altitude Ozone, -0.06158342, -0.1400892, DU / km²
+1st order Altitude Radiative_Forcing, 0.35372019, 0.99509589, mW/m² / km
+2nd order Altitude Radiative_Forcing, -0.22617486, 0.71110344, mW/m² / km²

@@ -1,27 +1,26 @@
 import numpy as np
 
-def calculate_delta_F_altitude(altitude_km, region, taylor_df, ref_km=18.3, mode="Ozone"):
+def calculate_delta_F_altitude(altitude_km, region, initial_emis_alt=18.3, mode="Ozone"):
     """
     Compute first term of ΔF(𝐗,Z) for a given region and altitude.
 
     Parameters:
         altitude_km (float): Emission altitude (e.g., 18.0).
         region (str): 'Transatlantic_Corridor' or 'South_Arabian_Sea'.
-        taylor_df (pd.DataFrame): Loaded from taylor_param.csv.
-        ref_km (float): Emission altitude of Taylor expansion reference.
+        initial_emis_alt (float): Emission altitude of reference.
         mode (str): "Ozone" or "Radiative_Forcing".
 
     Returns:
-        float: ΔF value in DU.
+        float: ΔF value in DU or mW/m2.
     """
 
-    if mode not in ["Ozone","Radiative_Forcing"]:
-        raise ValueError("mode keyword should be either Ozone or Radiative_Forcing!")
+    from response_model.read_data import load_data
+    _, taylor_df = load_data(prepare=True, mode=mode)
 
     # Convert pure altitude to relative altitude change from the reference
-    altitude_change = altitude_km - ref_km
-    # The taylor curve is calculated around an altitude of 18.3 km, so a relative altitude needs to be calculated
-    relative_altitude_183 = ref_km - 18.3
+    altitude_change = altitude_km - initial_emis_alt
+    # The Taylor curve is calculated around an altitude of 18.3 km, so a relative altitude needs to be calculated
+    relative_altitude_183 = initial_emis_alt - 18.3
     # Relative altitude change w.r.t. 18.3 km
     delta_altitude_183 = altitude_change + relative_altitude_183
 
@@ -35,7 +34,7 @@ def calculate_delta_F_altitude(altitude_km, region, taylor_df, ref_km=18.3, mode
 
     return delta_F_altitude
 
-def calculate_delta_F_emissions(altitude_km, emissions_dict, region, sensitivity_df, mode="Ozone"):
+def calculate_delta_F_emissions(altitude_km, emissions_dict, region, mode="Ozone"):
     """
     Compute second term of ΔF(𝐗,Z) for a given region, altitude and emissions.
 
@@ -43,15 +42,21 @@ def calculate_delta_F_emissions(altitude_km, emissions_dict, region, sensitivity
         altitude_km (float): Emission altitude (e.g., 18.0).
         emissions_dict (dict): Emission magnitudes, e.g., {'NOx': 10, 'H2O': 5}.
         region (str): 'Transatlantic_Corridor' or 'South_Arabian_Sea'.
-        sensitivity_df (pd.DataFrame): Loaded from sensitivity_ozone.csv.
         mode (str): "Ozone" or "Radiative_Forcing".
 
     Returns:
-        float: ΔF value in DU.
+        float: ΔF value in DU or mW/m2.
     """
 
-    if mode not in ["Ozone","Radiative_Forcing"]:
-        raise ValueError("mode keyword should be either Ozone or Radiative_Forcing!")
+    from response_model.read_data import load_data
+    sensitivity_df, _ = load_data(prepare=True, mode=mode)
+
+    # Get valid altitude bounds from the sensitivity data
+    valid_altitudes = sensitivity_df["Altitude_km"].unique()
+    z_min, z_max = valid_altitudes.min(), valid_altitudes.max()
+
+    if not (z_min <= altitude_km <= z_max):
+        raise Warning(f"Altitude {altitude_km} km is outside the supported range: {z_min}–{z_max} km, the estimate will have higher uncertainty!")
 
     # Emission-based term with interpolation
     delta_F_emissions = 0.0
@@ -76,7 +81,7 @@ def calculate_delta_F_emissions(altitude_km, emissions_dict, region, sensitivity
 
     return delta_F_emissions
 
-def calculate_delta_F(altitude_km, emissions_dict, region, sensitivity_df, taylor_df, ref_km=18.3, mode="Ozone"):
+def calculate_delta_F(altitude_km, emissions_dict, region, initial_emis_alt=18.3, mode="Ozone"):
     """
     Combine first and second order term of ΔF(𝐗,Z) for a given region, altitude and emissions.
 
@@ -84,38 +89,18 @@ def calculate_delta_F(altitude_km, emissions_dict, region, sensitivity_df, taylo
         altitude_km (float): Emission altitude (e.g., 18.0).
         emissions_dict (dict): Emission magnitudes, e.g., {'NOx': 10, 'H2O': 5}.
         region (str): 'Transatlantic_Corridor' or 'South_Arabian_Sea'.
-        sensitivity_df (pd.DataFrame): Loaded from sensitivity_ozone.csv.
-        taylor_df (pd.DataFrame): Loaded from taylor_param.csv.
-        ref_km (float): Emission altitude of Taylor expansion reference.
+        initial_emis_alt (float): Emission altitude of Taylor expansion reference.
 
     Returns:
-        float: ΔF value in DU.
+        float: ΔF value in DU or mW/m2.
     """
-    from ozone_model.taylor_model import calculate_delta_F_altitude, calculate_delta_F_emissions
-
-    if mode not in ["Ozone","Radiative_Forcing"]:
-        raise ValueError("mode keyword should be either Ozone or Radiative_Forcing!")
-
-    # Get valid altitude bounds from the sensitivity data
-    valid_altitudes = sensitivity_df["Altitude_km"].unique()
-    z_min, z_max = valid_altitudes.min(), valid_altitudes.max()
-
-    if not (z_min <= altitude_km <= z_max):
-        raise Warning(f"Altitude {altitude_km} km is outside the supported range: {z_min}–{z_max} km, the estimate will have higher uncertainty!")
+    from response_model.taylor_model import calculate_delta_F_altitude, calculate_delta_F_emissions
 
     # 1. Altitude-based term using Taylor expansion
-    delta_F_altitude = calculate_delta_F_altitude(altitude_km, region, taylor_df, ref_km,mode)
-
-    from ozone_model.read_data import load_data
-    sensitivity_df_o3, sensitivity_df_rf, taylor_df = load_data(prepare=True)
+    delta_F_altitude = calculate_delta_F_altitude(altitude_km, region, initial_emis_alt, mode)
 
     # 2. Emission-based term with interpolation
-    if mode == "Ozone":
-        delta_F_emissions = calculate_delta_F_emissions(altitude_km, emissions_dict, region, sensitivity_df_o3, mode)
-    elif mode == "Radiative_Forcing":
-        delta_F_emissions = calculate_delta_F_emissions(altitude_km, emissions_dict, region, sensitivity_df_rf, mode)
-    else:
-        raise ValueError("mode keyword should be either Ozone or Radiative_Forcing!")
+    delta_F_emissions = calculate_delta_F_emissions(altitude_km, emissions_dict, region, mode)
 
     # 3. Total
     delta_F_total = delta_F_altitude + delta_F_emissions
@@ -137,7 +122,7 @@ def calculate_delta_F_single(reference_altitude_km, change_altitude_km, change_i
         dict: dictionary with components of the ΔF value in DU (Ozone mode) or mW/m2 (Radiative_Forcing mode).
     """
     # Load the underlying data from the csv files
-    from ozone_model.read_data import load_data
+    from response_model.read_data import load_data
     sensitivity_df_o3, sensitivity_df_rf, taylor_df = load_data(prepare=True)
 
     # Check whether the input arguments are as expected
