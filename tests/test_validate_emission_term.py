@@ -1,12 +1,7 @@
 import pytest
-import pandas as pd
 from response_model.taylor_model import calculate_delta_F_emissions
 
-@pytest.fixture
-def sensitivity_df_o3():
-    return pd.read_csv('./data/sensitivity_ozone.csv', sep=', ', engine='python')
-
-def test_calculate_delta_F_emissions_o3(sensitivity_df_o3):
+def test_calculate_delta_F_emissions_o3():
     emissions = {'NO':43.2, 'SO':2.8224, 'H2O':3.36}
     region_map = {'TAC':'Transatlantic_Corridor', 'SAS':'South_Arabian_Sea'}
 
@@ -30,7 +25,7 @@ def test_calculate_delta_F_emissions_o3(sensitivity_df_o3):
 def sensitivity_df():
     return pd.read_csv('./data/sensitivity_radiative_forcing.csv', sep=', ', engine='python')
 
-def test_calculate_delta_F_emissions(sensitivity_df):
+def test_calculate_delta_F_emissions():
     emissions = {'NO':43.2, 'SO':2.8224, 'H2O':3.36}
     region_map = {'TAC':'Transatlantic_Corridor', 'SAS':'South_Arabian_Sea'}
 
