@@ -7,7 +7,7 @@ def calculate_delta_F_altitude(altitude_km, region, initial_emis_alt=18.3, mode=
     Parameters:
         altitude_km (float): Emission altitude (e.g., 18.0).
         region (str): 'Transatlantic_Corridor' or 'South_Arabian_Sea'.
-        initial_emis_alt (float): Emission altitude of Taylor expansion reference.
+        initial_emis_alt (float): Emission altitude of reference.
         mode (str): "Ozone" or "Radiative_Forcing".
 
     Returns:
@@ -19,7 +19,7 @@ def calculate_delta_F_altitude(altitude_km, region, initial_emis_alt=18.3, mode=
 
     # Convert pure altitude to relative altitude change from the reference
     altitude_change = altitude_km - initial_emis_alt
-    # The taylor curve is calculated around an altitude of 18.3 km, so a relative altitude needs to be calculated
+    # The Taylor curve is calculated around an altitude of 18.3 km, so a relative altitude needs to be calculated
     relative_altitude_183 = initial_emis_alt - 18.3
     # Relative altitude change w.r.t. 18.3 km
     delta_altitude_183 = altitude_change + relative_altitude_183
