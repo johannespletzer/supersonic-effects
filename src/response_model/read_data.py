@@ -14,16 +14,25 @@ def prepare_data(filepath):
 
     return df
 
-def load_data(prepare=False):
+def load_data(prepare=False, mode='Ozone'):
     '''Load sensitivity and taylor data from file as a pandas DataFrame'''
 
-    if prepare:
-        df_o3 = prepare_data('./data/sensitivity_ozone.csv')
-        df_rf = prepare_data('./data/sensitivity_radiative_forcing.csv')
-        df_t = prepare_data('./data/taylor_param.csv')
-    else:
-        df_o3 = pd.read_csv('./data/sensitivity_ozone.csv', sep=', ', engine='python')
-        df_rf = pd.read_csv('./data/sensitivity_radiative_forcing.csv', sep=', ', engine='python')
-        df_t = pd.read_csv('./data/taylor_param.csv', sep=', ', engine='python')
+    if mode not in ["Ozone","Radiative_Forcing"]:
+        raise ValueError("mode keyword should be either Ozone or Radiative_Forcing!")
 
-    return df_o3, df_rf, df_t
+    if prepare:
+        if mode=='Ozone':
+            df = prepare_data('./data/sensitivity_ozone.csv')
+            df_t = prepare_data('./data/taylor_param_ozone.csv')
+        elif mode=='Radiative_Forcing':
+            df = prepare_data('./data/sensitivity_radiative_forcing.csv')
+            df_t = prepare_data('./data/taylor_param_radiative_forcing.csv')
+    else:
+        if mode=='Ozone':
+            df = pd.read_csv('./data/sensitivity_ozone.csv', sep=', ', engine='python')
+            df_t = pd.read_csv('./data/taylor_param_ozone.csv', sep=', ', engine='python')
+        elif mode=='Radiative_Forcing':
+            df = pd.read_csv('./data/sensitivity_radiative_forcing.csv', sep=', ', engine='python')
+            df_t = pd.read_csv('./data/taylor_param_radiative_forcing.csv', sep=', ', engine='python')
+
+    return df, df_t
