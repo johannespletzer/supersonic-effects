@@ -1,8 +1,17 @@
+from typing import Tuple
 import pandas as pd
 
 
 def prepare_data(filepath: str) -> pd.DataFrame:
-    """Calculate mean, min, max columns"""
+    """
+    Calculate mean, min, max columns from sensitivity data
+
+    Args:
+        filepath (str): Path to ozone or radiation sensitivity data file
+
+    Returns:
+        pd.DataFrame: Extended with mean, min and max values as columns
+    """
 
     # Read data
     df = pd.read_csv(filepath, sep=", ", engine="python")
@@ -17,8 +26,17 @@ def prepare_data(filepath: str) -> pd.DataFrame:
 
 
 def load_data(prepare: bool=False, mode: str="Ozone") -> Tuple[pd.DataFrame]:
-    """Load sensitivity and taylor data from file as a pandas DataFrame"""
+    """
+    Loads and optionally prepares data for a given mode.
 
+    Parameters:
+        prepare (bool): Whether to preprocess the data. Default is False.
+        mode (str): The type of data to load. Default is "Ozone", alternative is "Radiative_Forcing".
+
+    Returns:
+        Tuple[pd.DataFrame, ...]: A tuple of two pandas DataFrames.
+    """
+    
     if mode not in ["Ozone", "Radiative_Forcing"]:
         raise ValueError("mode keyword should be either Ozone or Radiative_Forcing!")
 
