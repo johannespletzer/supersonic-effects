@@ -2,7 +2,7 @@ from typing import Tuple
 import pandas as pd
 
 
-def prepare_data(filepath):
+def prepare_data(filepath: str) -> pd.DataFrame:
     """
     Calculate mean, min, max columns from sensitivity data
 
@@ -25,9 +25,14 @@ def prepare_data(filepath):
     return df
 
 
+<<<<<<< src/response_model/read_data.py
 def load_data(prepare=False, mode="Ozone"):
     """
     Loads and optionally prepares data for a given mode.
+=======
+def load_data(prepare: bool=False, mode: str="Ozone") -> Tuple[pd.DataFrame]:
+    """Load sensitivity and taylor data from file as a pandas DataFrame"""
+>>>>>>> src/response_model/read_data.py
 
     Parameters:
         prepare (bool): Whether to preprocess the data. Default is False.
