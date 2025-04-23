@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def prepare_data(filepath):
+def prepare_data(filepath: str) -> pd.DataFrame:
     """Calculate mean, min, max columns"""
 
     # Read data
