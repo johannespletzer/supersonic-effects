@@ -122,10 +122,6 @@ def calculate_delta_F(
     Returns:
         float: ΔF value in DU or mW/m2.
     """
-    from response_model.taylor_model import (
-        calculate_delta_F_altitude,
-        calculate_delta_F_emissions,
-    )
 
     # 1. Altitude-based term using Taylor expansion
     delta_F_altitude = calculate_delta_F_altitude(
