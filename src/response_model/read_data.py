@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def prepare_data(filepath):
+def prepare_data(filepath: str) -> pd.DataFrame:
     """Calculate mean, min, max columns"""
 
     # Read data
@@ -16,7 +16,7 @@ def prepare_data(filepath):
     return df
 
 
-def load_data(prepare=False, mode="Ozone"):
+def load_data(prepare: bool=False, mode: str="Ozone") -> Tuple[pd.DataFrame]:
     """Load sensitivity and taylor data from file as a pandas DataFrame"""
 
     if mode not in ["Ozone", "Radiative_Forcing"]:

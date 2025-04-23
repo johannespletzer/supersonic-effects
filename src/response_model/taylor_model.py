@@ -2,8 +2,8 @@ import numpy as np
 
 
 def calculate_delta_F_altitude(
-    altitude_km, region, initial_emis_alt=18.3, mode="Ozone"
-):
+    altitude_km: float, region: str, initial_emis_alt=18.3, mode="Ozone"
+) -> float:
     """
     Compute first term of ΔF(𝐗,Z) for a given region and altitude.
 
@@ -53,7 +53,7 @@ def calculate_delta_F_altitude(
     return delta_F_altitude
 
 
-def calculate_delta_F_emissions(altitude_km, emissions_dict, region, mode="Ozone"):
+def calculate_delta_F_emissions(altitude_km: float, emissions_dict: dict, region: str, mode="Ozone") -> float:
     """
     Compute second term of ΔF(𝐗,Z) for a given region, altitude and emissions.
 
@@ -109,8 +109,8 @@ def calculate_delta_F_emissions(altitude_km, emissions_dict, region, mode="Ozone
 
 
 def calculate_delta_F(
-    altitude_km, emissions_dict, region, initial_emis_alt=18.3, mode="Ozone"
-):
+    altitude_km: float, emissions_dict: dict, region: str, initial_emis_alt=18.3, mode="Ozone"
+) -> float:
     """
     Combine first and second order term of ΔF(𝐗,Z) for a given region, altitude and emissions.
 
