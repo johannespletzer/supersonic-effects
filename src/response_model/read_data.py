@@ -26,15 +26,14 @@ def prepare_data(filepath):
 
 def load_data(prepare=False, mode="Ozone"):
     """
-    Load sensitivity and taylor data from file as a pandas DataFrame
+    Loads and optionally prepares data for a given mode.
 
-    Args:
-        prepare (Bool): True if mean values over corridors should be calculated
-        mode (str): "Ozone" or "Radiative_Forcing"
+    Parameters:
+        prepare (bool): Whether to preprocess the data. Default is False.
+        mode (str): The type of data to load. Default is "Ozone", alternative is "Radiative_Forcing".
 
     Returns:
-        pd.DataFrame: Ozone or radiative effects per altitude and flight corridor
-        pd.DataFrame: Taylor extension coefficients
+        Tuple[pd.DataFrame, ...]: A tuple of two pandas DataFrames.
     """
     
     if mode not in ["Ozone", "Radiative_Forcing"]:
