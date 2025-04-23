@@ -2,7 +2,15 @@ import pandas as pd
 
 
 def prepare_data(filepath):
-    """Calculate mean, min, max columns"""
+    """
+    Calculate mean, min, max columns from sensitivity data
+
+    Args:
+        filepath (str): Path to ozone or radiation sensitivity data file
+
+    Returns:
+        pd.DataFrame: Extended with mean, min and max values as columns
+    """
 
     # Read data
     df = pd.read_csv(filepath, sep=", ", engine="python")
@@ -17,8 +25,18 @@ def prepare_data(filepath):
 
 
 def load_data(prepare=False, mode="Ozone"):
-    """Load sensitivity and taylor data from file as a pandas DataFrame"""
+    """
+    Load sensitivity and taylor data from file as a pandas DataFrame
 
+    Args:
+        prepare (Bool): True if mean values over corridors should be calculated
+        mode (str): "Ozone" or "Radiative_Forcing"
+
+    Returns:
+        pd.DataFrame: Ozone or radiative effects per altitude and flight corridor
+        pd.DataFrame: Taylor extension coefficients
+    """
+    
     if mode not in ["Ozone", "Radiative_Forcing"]:
         raise ValueError("mode keyword should be either Ozone or Radiative_Forcing!")
 
