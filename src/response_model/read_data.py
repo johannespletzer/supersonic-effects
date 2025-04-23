@@ -25,14 +25,9 @@ def prepare_data(filepath: str) -> pd.DataFrame:
     return df
 
 
-<<<<<<< src/response_model/read_data.py
-def load_data(prepare=False, mode="Ozone"):
+def load_data(prepare: bool=False, mode: str="Ozone") -> Tuple[pd.DataFrame]:
     """
     Loads and optionally prepares data for a given mode.
-=======
-def load_data(prepare: bool=False, mode: str="Ozone") -> Tuple[pd.DataFrame]:
-    """Load sensitivity and taylor data from file as a pandas DataFrame"""
->>>>>>> src/response_model/read_data.py
 
     Parameters:
         prepare (bool): Whether to preprocess the data. Default is False.
