@@ -11,17 +11,17 @@ supersonic-effects/
 ├── src/
 │   └── response_model/
 │       ├── __init__.py
-│       └── taylor_model.py
-│       └── load_data.py
-├── scripts/
-│   └── example.py 
-│   └── test*.py 
+│       ├── taylor_model.py
+│       ├── load_data.py
+│       ├── data/
+│  	│   ├── sensitivity_*.csv
+│   	│   └── taylor_param_*.csv
+│       ├── scripts/ 
+│ 	    ├── example.py 
+│   	    └── test*.py 
 ├── tests/
-│   └── test_model.py
+│   ├── test_model.py
 │   └── test_validation*.py
-├── data/
-│   ├── sensitivity_*.csv
-│   └── taylor_param_*.csv
 ├── README.md
 ├── requirements.txt
 ├── pyproject.toml
