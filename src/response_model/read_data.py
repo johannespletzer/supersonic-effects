@@ -20,7 +20,7 @@ def load_data(prepare=False, mode="Ozone"):
     """Load sensitivity and taylor data from file as a pandas DataFrame"""
 
     if mode not in ["Ozone", "Radiative_Forcing"]:
-        raise ValueError("mode keyword should be either Ozone or Radiative_Forcing!")
+        raise ValueError("mode keyword should be either 'Ozone' or 'Radiative_Forcing'")
 
     if prepare:
         if mode == "Ozone":
