@@ -1,3 +1,4 @@
+import warnings
 import numpy as np
 from response_model.read_data import load_data
 
@@ -73,8 +74,9 @@ def calculate_delta_F_emissions(altitude_km, emissions_dict, region, mode="Ozone
     z_min, z_max = valid_altitudes.min(), valid_altitudes.max()
 
     if not (z_min <= altitude_km <= z_max):
-        raise Warning(
-            f"Altitude {altitude_km} km is outside the supported range: {z_min}–{z_max} km, the estimate will have higher uncertainty!"
+        warnings.warn(
+            f"Altitude {altitude_km} km is outside the supported range: {z_min}–{z_max} km. The estimate will have higher uncertainty!",
+            category=UserWarning
         )
 
     # Emission-based term with interpolation
