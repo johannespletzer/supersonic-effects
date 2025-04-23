@@ -16,7 +16,7 @@ def prepare_data(filepath: str) -> pd.DataFrame:
     return df
 
 
-def load_data(prepare=False, mode="Ozone"):
+def load_data(prepare: bool=False, mode: str="Ozone") -> Tuple[pd.DataFrame]:
     """Load sensitivity and taylor data from file as a pandas DataFrame"""
 
     if mode not in ["Ozone", "Radiative_Forcing"]:
