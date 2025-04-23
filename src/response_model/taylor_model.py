@@ -4,16 +4,16 @@ from response_model.read_data import load_data
 
 
 def calculate_delta_F_altitude(
-    altitude_km, region, initial_emis_alt=18.3, mode="Ozone"
-):
+    altitude_km: float, region: str, initial_emis_alt=18.3, mode="Ozone"
+) -> float:
     """
     Compute first term of ΔF(𝐗,Z) for a given region and altitude.
 
     Parameters:
-        altitude_km (float): Emission altitude (e.g., 18.0).
-        region (str): 'Transatlantic_Corridor' or 'South_Arabian_Sea'.
-        initial_emis_alt (float): Emission altitude of reference.
-        mode (str): "Ozone" or "Radiative_Forcing".
+        altitude_km: Emission altitude (e.g., 18.0).
+        region: 'Transatlantic_Corridor' or 'South_Arabian_Sea'.
+        initial_emis_alt: Emission altitude of reference.
+        mode: "Ozone" or "Radiative_Forcing".
 
     Returns:
         float: ΔF value in DU or mW/m2.
@@ -53,15 +53,15 @@ def calculate_delta_F_altitude(
     return delta_F_altitude
 
 
-def calculate_delta_F_emissions(altitude_km, emissions_dict, region, mode="Ozone"):
+def calculate_delta_F_emissions(altitude_km: float, emissions_dict: dict, region: str, mode="Ozone") -> float:
     """
     Compute second term of ΔF(𝐗,Z) for a given region, altitude and emissions.
 
     Parameters:
-        altitude_km (float): Emission altitude (e.g., 18.0).
-        emissions_dict (dict): Emission magnitudes, e.g., {'NOx': 10, 'H2O': 5}.
-        region (str): 'Transatlantic_Corridor' or 'South_Arabian_Sea'.
-        mode (str): "Ozone" or "Radiative_Forcing".
+        altitude_km: Emission altitude (e.g., 18.0).
+        emissions_dict: Emission magnitudes, e.g., {'NOx': 10, 'H2O': 5}.
+        region: 'Transatlantic_Corridor' or 'South_Arabian_Sea'.
+        mode: "Ozone" or "Radiative_Forcing".
 
     Returns:
         float: ΔF value in DU or mW/m2.
@@ -108,16 +108,16 @@ def calculate_delta_F_emissions(altitude_km, emissions_dict, region, mode="Ozone
 
 
 def calculate_delta_F(
-    altitude_km, emissions_dict, region, initial_emis_alt=18.3, mode="Ozone"
-):
+    altitude_km: float, emissions_dict: dict, region: str, initial_emis_alt=18.3, mode="Ozone"
+) -> float:
     """
     Combine first and second order term of ΔF(𝐗,Z) for a given region, altitude and emissions.
 
     Parameters:
-        altitude_km (float): Emission altitude (e.g., 18.0).
-        emissions_dict (dict): Emission magnitudes, e.g., {'NOx': 10, 'H2O': 5}.
-        region (str): 'Transatlantic_Corridor' or 'South_Arabian_Sea'.
-        initial_emis_alt (float): Emission altitude of Taylor expansion reference.
+        altitude_km: Emission altitude (e.g., 18.0).
+        emissions_dict: Emission magnitudes, e.g., {'NOx': 10, 'H2O': 5}.
+        region: 'Transatlantic_Corridor' or 'South_Arabian_Sea'.
+        initial_emis_alt: Emission altitude of Taylor expansion reference.
 
     Returns:
         float: ΔF value in DU or mW/m2.
