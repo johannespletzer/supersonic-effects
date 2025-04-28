@@ -52,7 +52,7 @@ pip install -e .
 
 ### Calculate ozone change:
 
-Either execute the example with `python3 scripts/example.py` or use the following code
+Either execute the example with `python3 src/scripts/example.py` or use the following code
 
 ```python
 from response_model.taylor_model import calculate_delta_F
