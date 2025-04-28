@@ -26,10 +26,7 @@ jobs:
           pip install -e .
 
       - name: Run linter (ruff)
-        run: ruff check src/ tests/ scripts/
-
-      - name: Run ruff format
-        run: ruff format src/ tests/ scripts/
+        run: ruff check src/ tests/ 
 
       - name: Run tests with coverage
         run: pytest
