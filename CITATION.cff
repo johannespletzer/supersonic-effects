@@ -1,0 +1,39 @@
+# YAML 1.2
+---
+authors:
+  - given-names: Johannes
+    family-names: Pletzer
+    affiliation: 'DLR, Germany'
+    orcid: 'https://orcid.org/0000-0003-3210-3496'
+  - given-names: Jurriaan
+    family-names: Van 't Hoff
+    affiliation: 'TU Delft, The Netherlands'
+    orcid: 'https://orcid.org/0000-0002-7761-7055'
+  - given-names: Volker
+    family-names: Grewe
+    affiliation: 'DLR, Germany; TU Delft, The Netherlands'
+    orcid: 'https://orcid.org/0000-0002-8012-6783'
+title: supersonic-effects
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+abstract: >-
+  A Python package to model ozone column changes and radiative
+  effects in response to various aircraft emissions at different
+  altitudes over specific regions. The model combines
+  empirical emission sensitivities with a Taylor expansion
+  in altitude to estimate effects on ozone and radiation.
+repository-code: 'https://github.com/johannespletzer/supersonic-effects'
+keywords:
+  - supersonic
+  - aircraft
+  - ozone
+  - emission
+  - stratosphere
+  - response model
+  - sensitivities
+  - atmosphere
+license: AGPL-3.0
+version: '0.2'
+cff-version: 1.2.0
