@@ -13,12 +13,13 @@ supersonic-effects/
 │       ├── __init__.py
 │       ├── taylor_model.py
 │       ├── load_data.py
-│       ├── data/
-│  	│   ├── sensitivity_*.csv
-│   	│   └── taylor_param_*.csv
+│       ├── resources/      # symbolic link ../../resources/
 │       ├── scripts/ 
 │ 	    ├── example.py 
 │   	    └── test*.py 
+├── resources/
+│   ├── sensitivity_*.csv
+│   └── taylor_param_*.csv
 ├── tests/
 │   ├── test_model.py
 │   └── test_validation*.py
@@ -38,12 +39,18 @@ supersonic-effects/
 
 ---
 
-## Installation
+## Installation and code changes
 
 Install the package:
 
 ```bash
 pip install -e .
+```
+
+Check code changes before committing to ensure integrity
+
+```bash
+pytest -v
 ```
 
 ---
@@ -74,12 +81,12 @@ print(f"ΔF = {delta_F:.2f} DU")
 
 ---
 
-## Data Source
+## Resources
 
 The data underlying the software originates from [Van 't Hoff et al. 2024](https://doi.org/10.1029/2023JD040476)
-- `data/sensitivity_ozone.csv`: Empirical sensitivities (mDU / unit / year)
-- `data/sensitivity_radiative_forcing.csv`: Empirical sensitivities (mW/m2 / unit / year)
-- `data/taylor_param_ozone.csv`: 1st and 2nd order coefficients for altitude effect (DU / km, DU / km²)
-- `data/taylor_param_radiative_forcing.csv`: 1st and 2nd order coefficients for altitude effect (mW/m2 / km, mW/m2 / km²)
+- `resources/sensitivity_ozone.csv`: Empirical sensitivities (mDU / unit / year)
+- `resources/sensitivity_radiative_forcing.csv`: Empirical sensitivities (mW/m2 / unit / year)
+- `resources/taylor_param_ozone.csv`: 1st and 2nd order coefficients for altitude effect (DU / km, DU / km²)
+- `resources/taylor_param_radiative_forcing.csv`: 1st and 2nd order coefficients for altitude effect (mW/m2 / km, mW/m2 / km²)
 
 ---

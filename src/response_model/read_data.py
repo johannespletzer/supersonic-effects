@@ -1,7 +1,7 @@
 from typing import Tuple
 import pandas as pd
 import importlib.resources as pkg_resources
-from response_model import data
+from response_model import resources
 
 
 def prepare_data(filepath: str) -> pd.DataFrame:
@@ -49,8 +49,8 @@ def load_data(prepare: bool=False, mode: str="Ozone") -> Tuple[pd.DataFrame]:
         sens_file = "sensitivity_radiative_forcing.csv"
         taylor_file = "taylor_param_radiative_forcing.csv"
 
-    with pkg_resources.files(data).joinpath(sens_file).open("r") as f1, \
-         pkg_resources.files(data).joinpath(taylor_file).open("r") as f2:
+    with pkg_resources.files(resources).joinpath(sens_file).open("r") as f1, \
+         pkg_resources.files(resources).joinpath(taylor_file).open("r") as f2:
 
         if prepare:
             df = prepare_data(f1)
