@@ -13,7 +13,6 @@ supersonic-effects/
 │       ├── __init__.py
 │       ├── taylor_model.py
 │       ├── load_data.py
-│       ├── resources/      # symbolic link ../../resources/
 │       ├── scripts/ 
 │ 	    ├── example.py 
 │   	    └── test*.py 
