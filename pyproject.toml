@@ -9,7 +9,8 @@ dependencies = [
     "pandas",
     "pytest",
     "pytest-cov",
-    "ruff"
+    "ruff",
+    "importlib-resources>=5.1.0"
 ]
 
 [build-system]
