@@ -10,6 +10,9 @@ jobs:
   build:
     name: Lint & Test on Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
 
     steps:
       - name: Checkout code
@@ -18,7 +21,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
         run: |
@@ -26,13 +29,7 @@ jobs:
           pip install -e .
 
       - name: Run linter (ruff)
-        run: ruff check src/ tests/ 
+        run: ruff check src/ tests/
 
       - name: Run tests with coverage
         run: pytest
-
-#      - name: Upload coverage to Codecov
-#        uses: codecov/codecov-action@v4
-#        with:
-#          token: ${{ secrets.CODECOV_TOKEN }}
-#          files: ./coverage.xml
