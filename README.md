@@ -1,32 +1,36 @@
-# Ozone Sensitivity Modeling
+# Ozone and Radiation Sensitivity Modeling
 
-A Python package to model ozone column changes (ΔF) in response to various aircraft emissions at different altitudes over specific regions. The model combines empirical emission sensitivities with a Taylor expansion in altitude to estimate total ozone impact.
+A Python package to model ozone column changes and radiative effects in response to various aircraft emissions at different altitudes over specific regions. The model combines empirical emission sensitivities with a Taylor expansion in altitude to estimate effects of supersonic transport on ozone and radiation.
 
 ---
 
-## 📦 Project Structure
+## Project Structure
 
 ```text
-supersonic-ozone/
+supersonic-effects/
 ├── src/
-│   └── example.py 
-│   └── ozone_model/
+│   └── response_model/
 │       ├── __init__.py
-│       └── taylor_model.py
-│       └── load_data.py
+│       ├── taylor_model.py
+│       ├── load_data.py
+│       ├── scripts/ 
+│ 	    ├── example.py 
+│   	    └── test*.py 
+├── resources/
+│   ├── sensitivity_*.csv
+│   └── taylor_param_*.csv
 ├── tests/
-│   └── test_model.py
-├── data/
-│   ├── sensitivity_ozone.csv
-│   └── taylor_param.csv
+│   ├── test_model.py
+│   └── test_validation*.py
 ├── README.md
 ├── requirements.txt
 ├── pyproject.toml
+...
 ```
 
 ---
 
-## 📈 Features
+## Features
 
 - Taylor expansion modeling of ozone change w.r.t. altitude
 - Emission-specific sensitivity interpolation
@@ -34,7 +38,7 @@ supersonic-ozone/
 
 ---
 
-## 🚀 Installation
+## Installation and code changes
 
 Install the package:
 
@@ -42,65 +46,46 @@ Install the package:
 pip install -e .
 ```
 
-Install dependencies:
+Check code changes before committing to ensure integrity
 
 ```bash
-pip install -r requirements.txt
+pytest -v
 ```
 
 ---
 
-## 🧠 Usage
+## Usage
 
 ### Calculate ozone change:
 
-Either execute the example with `python3 src/example.py` or use the following code
+Either execute the example with `python3 src/scripts/example.py` or use the following code
 
 ```python
-from ozone_model.taylor_model import calculate_delta_F
-from ozone_model.read_data import load_data
-
-# Load data
-sensitivity_df, taylor_df = load_data(prepare=False)
+from response_model.taylor_model import calculate_delta_F
 
 # Define inputs
 # Regions: Transatlantic_Corridor, South_Arabian_Sea or Mean (latter requires prepare=True)
-# Altitude: min 16.2, max 20.4 km
 region = "Transatlantic_Corridor" 
 altitude_km = 18.0
 emissions = {
-    'NOx': 100, # GgNO2/yr
-    'SOx': 50,  # GgS/yr
+    'NO': 100, # GgNO2/yr
+    'SO': 50,  # GgS/yr
     'H2O': 500, # TgH2O/yr
 }
 
 # Calculate ozone change (ΔF)
-delta_F = calculate_delta_F(altitude_km, emissions, region, sensitivity_df, taylor_df)
+delta_F = calculate_delta_F(altitude_km, emissions, region, mode='Ozone')
 print(f"ΔF = {delta_F:.2f} DU")
 ```
 
 ---
 
-## 📚 Data Source
+## Resources
 
 The data underlying the software originates from [Van 't Hoff et al. 2024](https://doi.org/10.1029/2023JD040476)
-- `data/sensitivity_ozone.csv`: Empirical sensitivities (mDU / unit / year)
-- `data/taylor_param.csv`: 1st and 2nd order coefficients for altitude effect (DU / km, DU / km²)
-
----
-
-## 🧪 Running Tests
-
-Requires `pytest`
-
-```bash
-pip install pytest
-```
-
-Then tests can be run simply after installation with
-
-```bash
-pytest
-```
+- `resources/sensitivity_ozone.csv`: Empirical sensitivities (mDU / unit / year)
+- `resources/sensitivity_radiative_forcing.csv`: Empirical sensitivities (mW/m2 / unit / year)
+- `resources/taylor_param_ozone.csv`: 1st and 2nd order coefficients for altitude effect (DU / km, DU / km²)
+- `resources/taylor_param_radiative_forcing.csv`: 1st and 2nd order coefficients for altitude effect (mW/m2 / km, mW/m2 / km²)
 
 ---

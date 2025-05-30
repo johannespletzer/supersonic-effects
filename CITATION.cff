@@ -13,18 +13,18 @@ authors:
     family-names: Grewe
     affiliation: 'DLR, Germany; TU Delft, The Netherlands'
     orcid: 'https://orcid.org/0000-0002-8012-6783'
-title: supersonic-ozone
+title: supersonic-effects
 message: >-
   If you use this software, please cite it using the
   metadata from this file.
 type: software
 abstract: >-
-  A Python package to model ozone column changes (ΔF) in
-  response to various aircraft emissions at different
+  A Python package to model ozone column changes and radiative
+  effects in response to various aircraft emissions at different
   altitudes over specific regions. The model combines
   empirical emission sensitivities with a Taylor expansion
-  in altitude to estimate total ozone impact.
-repository-code: 'https://github.com/johannespletzer/supersonic-ozone'
+  in altitude to estimate effects on ozone and radiation.
+repository-code: 'https://github.com/johannespletzer/supersonic-effects'
 keywords:
   - supersonic
   - aircraft
@@ -32,6 +32,26 @@ keywords:
   - emission
   - stratosphere
   - response model
-license: AGPL-3.0
-version: '0.1'
+  - sensitivities
+  - atmosphere
+license: Apache-2.0
+version: '1.0'
 cff-version: 1.2.0
+
+references:
+  - type: article
+    authors:
+      - family-names: "van ’t Hoff"
+        given-names: Jurriaan A.
+      - family-names: Grewe
+        given-names: Volker
+      - family-names: Dedoussi
+        given-names: Irene C.
+    title: "Sensitivities of Ozone and Radiative Forcing to Supersonic Aircraft Emissions Across Two Flight Corridors"
+    year: 2024
+    journal: "JGR Atmospheres"
+    volume: 129
+    issue: 22
+    article-number: e2023JD040476
+    doi: 10.1029/2023JD040476
+    url: https://doi.org/10.1029/2023JD040476 

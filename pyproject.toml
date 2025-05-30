@@ -1,10 +1,17 @@
 [project]
-name = "ozone_model"
-version = "0.1"
-description = "Modeling ozone changes from supersonic aircraft emissions"
+name = "response_model"
+version = "1.0"
+description = "Modeling ozone changes and radiative effects from supersonic aircraft emissions"
 readme = "README.md"
 requires-python = ">=3.8"
-dependencies = []
+dependencies = [
+    "numpy",
+    "pandas",
+    "pytest",
+    "pytest-cov",
+    "ruff",
+    "importlib-resources>=5.1.0"
+]
 
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
@@ -15,3 +22,6 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"response_model.resources" = ["*.csv"]
