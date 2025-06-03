@@ -16,7 +16,7 @@ authors:
 title: supersonic-effects
 message: >-
   If you use this software, please cite it using the
-  metadata from this file.
+  metadata consistent with CITATION.cff.
 type: software
 abstract: >-
   A Python package to model ozone column changes and radiative
