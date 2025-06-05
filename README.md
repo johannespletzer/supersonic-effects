@@ -4,8 +4,6 @@
 
 A Python package to model ozone column changes and radiative effects in response to various aircraft emissions at different altitudes over specific regions. The model combines empirical emission sensitivities with a Taylor expansion in altitude to estimate effects of supersonic transport on ozone and radiation.
 
----
-
 ## Features
 
 - Modeling of ozone change and radiative forcing 
