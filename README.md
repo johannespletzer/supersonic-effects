@@ -63,21 +63,23 @@ from response_model.taylor_model import calculate_delta_F_emissions
 region = "Transatlantic_Corridor"
 altitude_km = 18.0
 emissions = {
-    'NO': (100, "GgNO₂"),   # Gigagrams of NO2 per year
-    'SO': (50, "GgS"),      # Gigagrams of sulfur per year
-    'H2O': (500, "TgH₂O"),  # Teragrams of water vapor per year
+    'NO': (100, "GgNO2"),  # Gigagrams of NO2 per year
+    'SO': (5, "GgS"),      # Gigagrams of sulfur per year
+    'H2O': (50, "TgH2O"),  # Teragrams of water vapor per year
 }
 
 # Calculate ozone change or radiative forcing
+mode = 'Radiative_Forcing'  # or 'Radiative_Forcing'
 emission_values = {key: val[0] for key, val in emissions.items()}
-delta_F = calculate_delta_F_emissions(altitude_km, emission_values, region, mode='Ozone')  # or mode='Radiative_Forcing'
+delta_F = calculate_delta_F_emissions(altitude_km, emission_values, region, mode=mode)
 
 # Format emissions into a readable string with units
 emission_str = ', '.join([f"{key} = {value} {unit}" for key, (value, unit) in emissions.items()])
+unit_str = "DU" if mode == "Ozone" else "mW/m²"
 
 print(
-    f"The ozone change caused by a supersonic aircraft flying across the {region} "
-    f"at {altitude_km:.1f} km, emitting {emission_str}, is estimated to be ΔF = {delta_F:.2f} DU"
+    f"The {mode} effect of a supersonic aircraft flying across the {region} "
+    f"at {altitude_km:.1f} km, emitting {emission_str}, is estimated to be ΔF = {delta_F:.2f} {unit_str}"
 )
 ```
 
