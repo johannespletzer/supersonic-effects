@@ -48,7 +48,7 @@ Install the package:
 pip install -e .
 ```
 
-Check code changes before committing to ensure integrity
+If you want to contribute, check code changes before committing to ensure integrity
 
 ```bash
 pytest -v
@@ -66,7 +66,7 @@ Either execute the example with `python3 src/scripts/example.py` or use the foll
 from response_model.taylor_model import calculate_delta_F
 
 # Define inputs
-# Regions: Transatlantic_Corridor, South_Arabian_Sea or Mean (latter requires prepare=True)
+# Regions: Transatlantic_Corridor, South_Arabian_Sea or Mean
 region = "Transatlantic_Corridor" 
 altitude_km = 18.0
 emissions = {
@@ -75,8 +75,8 @@ emissions = {
     'H2O': 500, # TgH2O/yr
 }
 
-# Calculate ozone change (ΔF)
-delta_F = calculate_delta_F(altitude_km, emissions, region, mode='Ozone')
+# Calculate ozone change or radiative forcing
+delta_F = calculate_delta_F(altitude_km, emissions, region, mode='Ozone') # mode='Radiative_Forcing'
 print(f"ΔF = {delta_F:.2f} DU")
 ```
 
