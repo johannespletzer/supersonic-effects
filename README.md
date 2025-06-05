@@ -60,7 +60,7 @@ An example on how to use the code is shown here
 from response_model.taylor_model import calculate_delta_F_emissions
 
 # Define inputs
-mode = 'Ozone'  # or 'Radiative_Forcing'
+mode = 'Radiative_Forcing'  # or 'Ozone'
 region = "Transatlantic_Corridor"
 altitude_km = 18.0
 emissions = {
@@ -82,6 +82,18 @@ print(
     f"at {altitude_km:.1f} km, emitting {emission_str}, is estimated to be ΔF = {delta_F:.2f} {unit_str}"
 )
 ```
+
+### Example output
+
+The **radiative forcing** effect of a supersonic aircraft flying across the `Transatlantic_Corridor` at **18.0 km**, emitting:
+
+- **NO** = 100 GgNO₂  
+- **SO** = 5 GgS  
+- **H₂O** = 50 TgH₂O  
+
+is estimated to be:
+
+**ΔF = 9.76 mW/m²**
 
 More extensive examples including reference aircraft for comparison are shown in src/scripts/example.py You can execute this via
 
