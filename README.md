@@ -83,17 +83,19 @@ print(
 )
 ```
 
-### Example output
+### Example output (formatted)
 
 The **radiative forcing** effect of a supersonic aircraft flying across the `Transatlantic_Corridor` at **18.0 km**, emitting:
 
-- **NO** = 100 GgNO₂  
-- **SO** = 5 GgS  
-- **H₂O** = 50 TgH₂O  
+- NO = 100 GgNO₂  
+- SO = 5 GgS  
+- H₂O = 50 TgH₂O  
 
 is estimated to be:
 
-**ΔF = 9.76 mW/m²**
+ΔF = 9.76 mW/m²
+
+### Other examples
 
 More extensive examples including reference aircraft for comparison are shown in src/scripts/example.py You can execute this via
 
