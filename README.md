@@ -34,9 +34,10 @@ supersonic-effects/
 
 ## Features
 
-- Taylor expansion modeling of ozone change w.r.t. altitude
-- Emission-specific sensitivity interpolation
+- Modeling of ozone change and radiative forcing 
 - Supports multiple geographic regions
+- Emission-specific sensitivity interpolation to altitude of emission
+- Optional Taylor expansion w.r.t. cruise altitude to compare to reference aircraft
 
 ---
 
