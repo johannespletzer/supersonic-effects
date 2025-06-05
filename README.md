@@ -57,24 +57,31 @@ pip install -e .
 An example on how to use the code is shown here
 
 ```python
-from response_model.taylor_model import calculate_delta_F
+from response_model.taylor_model import calculate_delta_F_emissions
 
 # Define inputs
-# Regions: Transatlantic_Corridor, South_Arabian_Sea or Mean
-region = "Transatlantic_Corridor" 
+region = "Transatlantic_Corridor"
 altitude_km = 18.0
 emissions = {
-    'NO': 100, # GgNO2/yr
-    'SO': 50,  # GgS/yr
-    'H2O': 500, # TgH2O/yr
+    'NO': (100, "GgNO₂"),   # Gigagrams of NO2 per year
+    'SO': (50, "GgS"),      # Gigagrams of sulfur per year
+    'H2O': (500, "TgH₂O"),  # Teragrams of water vapor per year
 }
 
 # Calculate ozone change or radiative forcing
-delta_F = calculate_delta_F(altitude_km, emissions, region, mode='Ozone') # mode='Radiative_Forcing'
-print(f"ΔF = {delta_F:.2f} DU")
+emission_values = {key: val[0] for key, val in emissions.items()}
+delta_F = calculate_delta_F_emissions(altitude_km, emission_values, region, mode='Ozone')  # or mode='Radiative_Forcing'
+
+# Format emissions into a readable string with units
+emission_str = ', '.join([f"{key} = {value} {unit}" for key, (value, unit) in emissions.items()])
+
+print(
+    f"The ozone change caused by a supersonic aircraft flying across the {region} "
+    f"at {altitude_km:.1f} km, emitting {emission_str}, is estimated to be ΔF = {delta_F:.2f} DU"
+)
 ```
 
-More extensive examples are shown in src/scripts/example.py You can execute this via
+More extensive examples including reference aircraft for comparison are shown in src/scripts/example.py You can execute this via
 
 ```python
 python3 src/scripts/example.py
