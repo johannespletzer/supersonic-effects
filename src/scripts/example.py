@@ -24,8 +24,8 @@ delta_F_alt = calculate_delta_F_altitude(altitude_km, region, reference_km)
 delta_F_emis = calculate_delta_F_emissions(altitude_km, emissions, region)
 
 
-print('Region: "Transatlantic_Corridor",\t mode: "Ozone"')
-print("Should result in around 0.26 DU (0.17 DU for altitude term, 0.09 DU for emission term) with default settings\n")
+print('\nRegion: "Transatlantic_Corridor", mode: "Ozone"')
+print("Should result in around 0.3 DU (0.2 DU for altitude term, 0.1 DU for emission term) with default settings\n")
 print(
     f"ΔF = {delta_F:.3f} DU,",
     f"ΔF(alt) = {delta_F_alt:.3f} DU,",
@@ -43,8 +43,8 @@ delta_F_emis = calculate_delta_F_emissions(
     altitude_km, emissions, region, mode="Radiative_Forcing"
 )
 
-print('Region: "Transatlantic_Corridor",\t mode: "Radiative_Forcing"')
-print("Should result in around 0.41 mW/m2 (-1.24 mW/m2 altitude term, 1.65 mW/m2 for emission term) with default settings\n")
+print('\n\nRegion: "Transatlantic_Corridor", mode: "Radiative_Forcing"')
+print("Should result in around 0.4 mW/m2 (-1.2 mW/m2 altitude term, 1.7 mW/m2 for emission term) with default settings\n")
 print(
     f"ΔF = {delta_F:.3f} mW/m2,",
     f"ΔF(alt) = {delta_F_alt:.3f} mW/m2,",
@@ -58,8 +58,8 @@ reference_km = 16.2
 altitude_km = 20.4
 region = "South_Arabian_Sea"
 
-print('Region: "South_Arabian_Sea",\t mode: "Ozone"')
-print("Should result in around -1.18 (-1.0 DU for altitude term, -0.2 DU for emission term) with default settings\n")
+print('\n\nRegion: "South_Arabian_Sea", mode: "Ozone"')
+print("Should result in around -1.2 (-1.0 DU for altitude term, -0.2 DU for emission term) with default settings\n")
 
 # Calculate ozone change (ΔF), first and second term
 delta_F = calculate_delta_F(altitude_km, emissions, region, reference_km)
@@ -83,10 +83,10 @@ delta_F_emis = calculate_delta_F_emissions(
     altitude_km, emissions, region, mode="Radiative_Forcing"
 )
 
-print('Region: "South_Arabian_Sea",\t mode: "Radiative_Forcing"')
-print("Should result in around 7.09 mW/m2 (4.2 mW/m2 altitude term, 2.9 mW/m2 for emission term) with default settings\n")
+print('\n\nRegion: "South_Arabian_Sea", mode: "Radiative_Forcing"')
+print("Should result in around 7.1 mW/m2 (4.2 mW/m2 altitude term, 2.9 mW/m2 for emission term) with default settings\n")
 print(
     f"ΔF = {delta_F:.3f} mW/m2,",
     f"ΔF(alt) = {delta_F_alt:.3f} mW/m2,",
-    f"ΔF(emis) = {delta_F_emis:.3f} mW/m2",
+    f"ΔF(emis) = {delta_F_emis:.3f} mW/m2\n",
 )
