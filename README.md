@@ -40,27 +40,20 @@ supersonic-effects/
 
 ---
 
-## Installation and code changes
+## Use the software
 
+### Installation
 Install the package:
 
 ```bash
 pip install -e .
 ```
 
-If you want to contribute, check code changes before committing to ensure integrity
-
-```bash
-pytest -v
-```
-
----
-
-## Usage
+### Run calculation
 
 ### Calculate ozone change:
 
-Either execute the example with `python3 src/scripts/example.py` or use the following code
+An example on how to use the code is shown here
 
 ```python
 from response_model.taylor_model import calculate_delta_F
@@ -78,6 +71,12 @@ emissions = {
 # Calculate ozone change or radiative forcing
 delta_F = calculate_delta_F(altitude_km, emissions, region, mode='Ozone') # mode='Radiative_Forcing'
 print(f"ΔF = {delta_F:.2f} DU")
+```
+
+More extensive examples are shown in src/scripts/example.py You can execute this via
+
+```python
+python3 src/scripts/example.py
 ```
 
 ---
