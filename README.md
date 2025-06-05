@@ -60,6 +60,7 @@ An example on how to use the code is shown here
 from response_model.taylor_model import calculate_delta_F_emissions
 
 # Define inputs
+mode = 'Ozone'  # or 'Radiative_Forcing'
 region = "Transatlantic_Corridor"
 altitude_km = 18.0
 emissions = {
@@ -69,7 +70,6 @@ emissions = {
 }
 
 # Calculate ozone change or radiative forcing
-mode = 'Radiative_Forcing'  # or 'Radiative_Forcing'
 emission_values = {key: val[0] for key, val in emissions.items()}
 delta_F = calculate_delta_F_emissions(altitude_km, emission_values, region, mode=mode)
 
