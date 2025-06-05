@@ -6,32 +6,6 @@ A Python package to model ozone column changes and radiative effects in response
 
 ---
 
-## Project Structure
-
-```text
-supersonic-effects/
-├── src/
-│   └── response_model/
-│       ├── __init__.py
-│       ├── taylor_model.py
-│       ├── load_data.py
-│       ├── scripts/ 
-│ 	    ├── example.py 
-│   	    └── test*.py 
-├── resources/
-│   ├── sensitivity_*.csv
-│   └── taylor_param_*.csv
-├── tests/
-│   ├── test_model.py
-│   └── test_validation*.py
-├── README.md
-├── requirements.txt
-├── pyproject.toml
-...
-```
-
----
-
 ## Features
 
 - Modeling of ozone change and radiative forcing 
@@ -101,6 +75,32 @@ More extensive examples including reference aircraft for comparison are shown in
 
 ```python
 python3 src/scripts/example.py
+```
+
+---
+
+## Project Structure
+
+```text
+supersonic-effects/
+├── src/
+│   └── response_model/
+│       ├── __init__.py
+│       ├── taylor_model.py
+│       ├── load_data.py
+│       ├── scripts/ 
+│ 	    ├── example.py 
+│   	    └── test*.py 
+├── resources/
+│   ├── sensitivity_*.csv
+│   └── taylor_param_*.csv
+├── tests/
+│   ├── test_model.py
+│   └── test_validation*.py
+├── README.md
+├── requirements.txt
+├── pyproject.toml
+...
 ```
 
 ---
