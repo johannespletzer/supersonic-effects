@@ -10,7 +10,8 @@ dependencies = [
     "pytest",
     "pytest-cov",
     "ruff",
-    "importlib-resources>=5.1.0"
+    "importlib-resources>=5.1.0",
+    "onnxruntime>=1.22.2"
 ]
 
 [build-system]
@@ -25,3 +26,4 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 "response_model.resources" = ["*.csv"]
+"multilayer_perceptron.resources" = ["*.onnx"]
