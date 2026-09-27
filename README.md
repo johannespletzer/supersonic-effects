@@ -1,6 +1,6 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15552405.svg)](https://doi.org/10.5281/zenodo.15552405)
 
-# Ozone and Radiation Sensitivity Modeling
+# Ozone and Radiation Sensitivity Modeling with a response model
 
 A Python package to model ozone column changes and radiative effects in response to various aircraft emissions at different altitudes over specific regions. The model combines empirical emission sensitivities with a Taylor expansion in altitude to estimate effects of supersonic transport on ozone and radiation.
 
