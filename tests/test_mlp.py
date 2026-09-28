@@ -29,14 +29,14 @@ def run_batch(sess, rows):
 def test_model_interface(sess):
     assert [i.name for i in sess.get_inputs()] == INPUT_NAMES
     assert all(i.type == "tensor(float)" for i in sess.get_inputs())
-    assert run_single(sess, 0, EXAMPLE_FLEET).shape == (5, 1)
+    assert run_single(sess, 1, EXAMPLE_FLEET).shape == (5, 1)
 
 
 # Expected [O3 column change (DU), RF O3, RF H2O, RF BC, RF inorganic aerosols (mW/m2)]
 @pytest.mark.parametrize(
     "day_of_year, fleet, expected",
     [
-        (0, EXAMPLE_FLEET, [-3.0843942, 14.421381, 30.927917, -1.0785394, -5.8027077]),
+        (1, EXAMPLE_FLEET, [-3.0623672, 14.148865, 31.269156, -1.0573092, -5.8160567]),
         (182, EXAMPLE_FLEET, [-2.4493368, 31.451275, 22.825172, -2.165515, -12.26728]),
         (91, OTHER_FLEET, [-1.3820981, 10.316982, 56.266796, -3.5810843, -23.37438]),
         (273, OTHER_FLEET, [-1.9069461, -0.71658, 78.77595, -3.0080059, -24.343597]),
@@ -48,7 +48,7 @@ def test_reference_values(sess, day_of_year, fleet, expected):
 
 
 def test_batch_matches_single_calls(sess):
-    days = [0, 91, 300]
+    days = [1, 91, 300]
     fleets = [EXAMPLE_FLEET, OTHER_FLEET, [19.5, 10, 20, 0.1, 5.0, 0.001]]
     output = run_batch(sess, [[day, *fleet] for day, fleet in zip(days, fleets)])
     single = [run_single(sess, day, fleet)[:, 0] for day, fleet in zip(days, fleets)]
@@ -56,7 +56,7 @@ def test_batch_matches_single_calls(sess):
 
 
 def test_outputs_finite_at_training_range_corners(sess):
-    rows = [[day, *corner] for day in (0, 182) for corner in itertools.product(*TRAINING_RANGES)]
+    rows = [[day, *corner] for day in (1, 365) for corner in itertools.product(*TRAINING_RANGES)]
     output = run_batch(sess, rows)
     assert output.shape == (5 * len(rows), 1)
     assert np.isfinite(output).all()
