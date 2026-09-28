@@ -1,11 +1,7 @@
-import sys
+from importlib.resources import files
 
-
-if sys.version_info >= (3, 9):
-    from importlib.resources import files
-else:
-    from importlib_resources import files
 from multilayer_perceptron import resources
+
 
 def load_mlp():
     import onnxruntime as rt
