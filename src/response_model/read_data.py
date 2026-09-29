@@ -1,10 +1,7 @@
-import sys
-from typing import Tuple
+from importlib.resources import files
+
 import pandas as pd
-if sys.version_info >= (3, 9):
-    from importlib.resources import files
-else:
-    from importlib_resources import files
+
 from response_model import resources
 
 
@@ -31,7 +28,7 @@ def prepare_data(filepath: str) -> pd.DataFrame:
     return df
 
 
-def load_data(prepare: bool=False, mode: str="Ozone") -> Tuple[pd.DataFrame]:
+def load_data(prepare: bool=False, mode: str="Ozone") -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     Loads and optionally prepares data for a given mode.
 
@@ -40,7 +37,7 @@ def load_data(prepare: bool=False, mode: str="Ozone") -> Tuple[pd.DataFrame]:
         mode (str): The type of data to load. Default is "Ozone", alternative is "Radiative_Forcing".
 
     Returns:
-        Tuple[pd.DataFrame, ...]: A tuple of two pandas DataFrames.
+        tuple[pd.DataFrame, pd.DataFrame]: A tuple of two pandas DataFrames.
     """
     
     if mode not in ["Ozone", "Radiative_Forcing"]:

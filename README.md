@@ -17,10 +17,18 @@ A Python package to model ozone column changes and radiative effects in response
 ## Use the software
 
 ### Installation
-Install the package:
+Requires Python 3.9 or newer. Install the package:
 
 ```bash
 pip install -e .
+```
+
+For development, install the test and lint tools as well, then run the tests and the linter:
+
+```bash
+pip install -e ".[dev]"
+pytest
+ruff check src/ tests/
 ```
 
 ### Running the response model
@@ -90,7 +98,7 @@ supersonic-effects/
 │   ├── response_model/
 │   |   ├── __init__.py
 │   |   ├── taylor_model.py
-│   |   ├── load_data.py
+│   |   ├── read_data.py
 │   |   └── resources/ 
 │   |       ├── __init__.py 
 │   |       ├── sensitivity_*.csv 
@@ -105,16 +113,16 @@ supersonic-effects/
 │   |   ├── example_MLP.ipynb
 │   |   ├── example.py
 │   |   ├── test_altitude.py
-│   |   └── test_emission/ 
+│   |   └── test_emission.py
 ├── resources/
 |   ├── __init__.py
 │   ├── sensitivity_*.csv
 │   └── taylor_param_*.csv
 ├── tests/
+│   ├── test_mlp.py
 │   ├── test_model.py
-│   └── test_validation*.py
+│   └── test_validate_*.py
 ├── README.md
-├── requirements.txt
 ├── pyproject.toml
 ...
 ```

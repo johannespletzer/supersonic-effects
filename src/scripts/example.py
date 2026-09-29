@@ -4,7 +4,6 @@ from response_model.taylor_model import (
     calculate_delta_F_emissions,
 )
 
-
 # Calculate ozone changes
 
 altitude_km = 16.2
