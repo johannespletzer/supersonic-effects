@@ -2,34 +2,54 @@ name: CI - Lint and Test
 
 on:
   push:
-    branches: [master, devel]
+    branches: [master, devel, MLP]
   pull_request:
-    branches: [master]
 
 jobs:
   build:
     name: Lint & Test on Python ${{ matrix.python-version }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -e .
+          pip install -e ".[dev]"
 
       - name: Run linter (ruff)
         run: ruff check src/ tests/
 
       - name: Run tests with coverage
+        run: pytest --cov=response_model --cov=multilayer_perceptron
+
+  minimum-versions:
+    name: Test with minimum supported onnxruntime on Python 3.9
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.9"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]" "onnxruntime==1.18.1"
+
+      - name: Run tests
         run: pytest

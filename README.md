@@ -2,27 +2,36 @@
 
 # Ozone and Radiation Sensitivity Modeling
 
-A Python package to model ozone column changes and radiative effects in response to various aircraft emissions at different altitudes over specific regions. The model combines empirical emission sensitivities with a Taylor expansion in altitude to estimate effects of supersonic transport on ozone and radiation.
+A Python package to model ozone column changes and radiative effects in response to various aircraft emissions at different altitudes. This package includes a region-specific response model based on empirical emission sensitivities and Taylor expansion, as well as a pre-trained multilayer perceptron trained on 60 fleet emission scenarios.
 
 ## Features
 
-- Modeling of ozone change and radiative forcing 
-- Supports multiple geographic regions
-- Emission-specific sensitivity interpolation to altitude of emission
-- Optional Taylor expansion w.r.t. cruise altitude to compare to reference aircraft
+- Modeling of ozone change and radiative forcing (response model, MLP)
+- Supports multiple geographic regions (response model)
+- Emission-specific sensitivity interpolation to altitude of emission (response model, MLP)
+- Optional Taylor expansion w.r.t. cruise altitude to compare to reference aircraft (response model)
+- Prediction of seasonal variation of ozone column changes and radiative forcing (MLP)
 
 ---
 
 ## Use the software
 
 ### Installation
-Install the package:
+Requires Python 3.9 or newer. Install the package:
 
 ```bash
 pip install -e .
 ```
 
-### Run calculation
+For development, install the test and lint tools as well, then run the tests and the linter:
+
+```bash
+pip install -e ".[dev]"
+pytest
+ruff check src/ tests/
+```
+
+### Running the response model
 
 ### Calculate ozone change:
 
@@ -77,26 +86,43 @@ python3 src/scripts/example.py
 
 ---
 
+### Running the multilayer perceptron
+
+For an example on how to load and use the trained multilayer perceptron see src/scripts/example_MLP.ipynb. 
+
 ## Project Structure
 
 ```text
 supersonic-effects/
 ├── src/
-│   └── response_model/
-│       ├── __init__.py
-│       ├── taylor_model.py
-│       ├── load_data.py
-│       ├── scripts/ 
-│ 	    ├── example.py 
-│   	    └── test*.py 
+│   ├── response_model/
+│   |   ├── __init__.py
+│   |   ├── taylor_model.py
+│   |   ├── read_data.py
+│   |   └── resources/ 
+│   |       ├── __init__.py 
+│   |       ├── sensitivity_*.csv 
+│   |       └── taylor_param_*.csv
+│   ├── multilayer_perceptron/
+│   |   ├── __init__.py
+│   |   ├── load_mlp.py
+│   |   └── resources/ 
+│   |       ├── __init__.py 
+│   |       └── trained_mlp_vanthoff_etal_2026.onnx 
+│   └── scripts/
+│   |   ├── example_MLP.ipynb
+│   |   ├── example.py
+│   |   ├── test_altitude.py
+│   |   └── test_emission.py
 ├── resources/
+|   ├── __init__.py
 │   ├── sensitivity_*.csv
 │   └── taylor_param_*.csv
 ├── tests/
+│   ├── test_mlp.py
 │   ├── test_model.py
-│   └── test_validation*.py
+│   └── test_validate_*.py
 ├── README.md
-├── requirements.txt
 ├── pyproject.toml
 ...
 ```

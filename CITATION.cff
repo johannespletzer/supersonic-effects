@@ -55,3 +55,20 @@ references:
     article-number: e2023JD040476
     doi: 10.1029/2023JD040476
     url: https://doi.org/10.1029/2023JD040476 
+  - type: article
+    authors:
+      - family-names: "van ’t Hoff"
+        given-names: Jurriaan A.
+      - family-names: Grewe
+        given-names: Volker
+      - family-names: Dedoussi
+        given-names: Irene C.
+    title: "Evaluating the ozone and climate effects of supersonic aircraft fleet design choices using machine learning"
+    year: 2026
+    journal: "Environmental Data Science"
+    volume: TBD
+    issue: TBD
+    article-number: TBD
+    doi: TBD
+    url: TBD
+
